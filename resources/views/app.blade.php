@@ -15,9 +15,17 @@
 </head>
 
 <body>
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-    </h1>
+    <div class="h-screen bg-black text-white">
+        <nav class="flex flex-row justify-between">
+
+            <a href="/">bxcars</a>
+            <button class=" border-2 border-red-600 rounded-lg">
+                <a href="login">Login / Register</a>
+            </button>
+        </nav>
+
+    </div>
+
 </body>
 
 </html>
