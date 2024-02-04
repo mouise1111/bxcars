@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Accueil - BX Cars</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -35,7 +35,7 @@
             </button>
         </nav>
         <h1 class="text-5xl font-bold text-center lg:px-32">
-            Discover the world on wheels with out car rental service
+            Votre clé pour explorer le Maroc, confort et liberté garantis
         </h1>
         <!-- make this background 90% + see figma for more effects on this -->
         <div class="py-4 text-black bg-white/70 rounded-3xl backdrop-blur-3xl" id="selection-back"></div>
@@ -76,232 +76,68 @@
         </div>
     </section>
     <section class="py-32 text-black bg-gray-100">
-        <h1 class="text-5xl font-semibold text-center">Our impressive Collection of Cars</h1>
+        <h1 class="text-5xl font-semibold text-center">Notre collection de voitures</h1>
         <h3 class="mt-4 text-lg text-center lg:px-56">
-            Ranging from elegant sedands to powerfull sport cars, all are carefully selected to provide our
-            costumers with the ultimate driving experience.
+            De citadines modernes à des SUV robustes, chaque véhicule est méticuleusement sélectionné pour garantir une
+            expérience de conduite confortable et à la pointe de la technologie.
         </h3>
-        <div class="flex flex-row justify-center gap-4 py-12">
-            <div>
-                <button class="px-4 py-2 text-white bg-black border-2 border-gray- rounded-3xl">
-                    <h5>Popular</h5>
-                </button>
+
+
+        <div class="grid grid-cols-3 grid-rows-2 gap-4 lg:px-20 mt-20">
+            @foreach ($cars as $car)
+            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
+                <img src="{{ Storage::url($car->photo) }}" alt="Car Image">
+                <div class="p-2">
+                    <h4 class="text-lg font-semibold p">{{ $car->model_name }}</h4>
+                    <div class="flex flex-row items-end">
+                        <h5 class="text-4xl font-bold">{{ number_format($car->price_per_day, 0, '.', '') }} DH<span
+                                class="text-xl font-medium text-gray-800"> /jour</span></h5>
+                        <span class="text-sm text-gray-500 ml-2">Caution: {{ number_format($car->price_caution, 0, '.',
+                            '') }} DH</span>
+                    </div>
+                    <div
+                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
+                        <div class="flex flex-col">
+                            <img src="/speedometer.png" class="self-center icons" alt="mileage icon" />
+                            <span>{{ $car->total_km }} KM</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <img src="/manual-gearbox.png" class="self-center icons" alt="transmission icon" />
+                            <span>
+                                @if($car->transmission === 'Manual')
+                                Manuel
+                                @elseif($car->transmission === 'Automatic')
+                                Automatique
+                                @else
+                                {{ $car->transmission }}
+                                @endif
+                            </span>
+                        </div>
+                        <div class="flex flex-col">
+                            <img src="/users.png" class="self-center icons" alt="seats icon" />
+                            <span>{{ $car->seats }} Sièges</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <img src="/gas-station.png" class="self-center icons" alt="fuel type icon" />
+                            <span>{{ $car->fuel_type }}</span>
+                        </div>
+                    </div>
+                    @if(!$car->disponible)
+                    <p
+                        class="block w-full px-4 py-2 text-center text-white bg-red-600 border-2 border-red-600 rounded-3xl">
+                        Indisponible</p>
+                    @else
+                    <button
+                        class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
+                        Louer
+                    </button>
+                    @endif
+                </div>
             </div>
-            <div>
-                <button class="px-4 py-2 text-black bg-white border-2 border-gray rounded-3xl">
-                    <h5>Luxury</h5>
-                </button>
-            </div>
-            <div>
-                <button class="px-4 py-2 text-black bg-white border-2 border-gray rounded-3xl">
-                    <h5>Vintage</h5>
-                </button>
-            </div>
-            <div>
-                <button class="px-4 py-2 text-black bg-white border-2 border-gray rounded-3xl">
-                    <h5>Family</h5>
-                </button>
-            </div>
-            <div>
-                <button class="px-4 py-2 text-black bg-white border-2 border-gray rounded-3xl">
-                    <h5>Off-Road</h5>
-                </button>
-            </div>
+            @endforeach
         </div>
 
-        <div class="grid grid-cols-3 grid-rows-2 gap-4 lg:px-20">
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="/audio-car.png" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold p">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="/audio-car.png" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="{{ asset('audio-car.png') }}" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="/audio-car.png" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="/audio-car.png" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
-            <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
-                <img src="/audio-car.png" alt="audi car" />
-                <div class="p-2">
-                    <h4 class="text-lg font-semibold">Audi A8 L 2022</h4>
-                    <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">78.90</h5>
-                        <span class="font-medium text-gray-800"> /day</span>
-                    </div>
-                    <div
-                        class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
-                        <div class="flex flex-col">
-                            <img src="/speedometer.png" class="self-center icons" alt="milage icon" />
-                            <span>4,000</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/manual-gearbox.png" class="self-center icons" alt="manual gearbox icon" />
-                            <span>Auto</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/users.png" class="self-center icons" alt="people icon" />
-                            <span>4 People</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <img src="/gas-station.png" class="self-center icons" alt="electric icon" />
-                            <span>Electric</span>
-                        </div>
-                    </div>
-                    <button
-                        class="block w-full px-4 py-2 font-medium text-center transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
-                        Rent now</button>
-                </div>
-            </div>
+        </div>
 
         </div>
         <div class="flex justify-center lg:py-12">
@@ -309,7 +145,7 @@
             <a href="/cars">
                 <button
                     class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black">
-                    <h4 class="w-full px-8 py-4">See all cars</h4>
+                    <h4 class="w-full px-8 py-4">Voir plus</h4>
                 </button>
             </a>
         </div>
