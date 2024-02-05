@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/createcar.css') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+Double+Pica+SC&family=Inter&family=Koulen&family=League+Gothic&family=Lobster&family=Playfair+Display+SC&family=Saira+Condensed:wght@600&family=Saira+Stencil+One&family=Waterfall&display=swap"
@@ -97,8 +97,16 @@
                     </div>
 
                     <div class="mt-4">
-                        <label class="block" for="price_per_day">Prix par jour</label>
-                        <input type="number" step="0.01" name="price_per_day"
+                        <label class="block" for="price_per_day_short_term">Prix par jour (Moins ou égal à 3
+                            jours)</label>
+                        <input type="number" step="0.01" name="price_per_day_short_term"
+                            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                            required>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="block" for="price_per_day_long_term">Prix par jour (Plus de 3 jours)</label>
+                        <input type="number" step="0.01" name="price_per_day_long_term"
                             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                             required>
                     </div>
@@ -152,9 +160,7 @@
 
                     <div class="mt-4">
                         <label class="block" for="disponible">Disponibilité</label>
-                        <!-- Champ caché pour envoyer '0' lorsque la case n'est pas cochée -->
                         <input type="hidden" name="disponible" value="0">
-                        <!-- La case à cocher envoie '1' si elle est sélectionnée, écrasant la valeur du champ caché -->
                         <input type="checkbox" name="disponible" value="1"
                             class="w-4 h-4 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                             checked> Oui
@@ -177,7 +183,8 @@
             <thead class="bg-gray-800 text-white">
                 <tr>
                     <th class="px-6 py-2 text-center">Modèle</th>
-                    <th class="px-6 py-2 text-center">Prix/jour</th>
+                    <th class="px-6 py-2 text-center">Prix/jour (3J)</th>
+                    <th class="px-6 py-2 text-center">Prix/jour (+3J)</th>
                     <th class="px-6 py-2 text-center">Caution</th>
                     <th class="px-6 py-2 text-center">Total KM</th>
                     <th class="px-6 py-2 text-center">Transmission</th>
@@ -193,7 +200,8 @@
                 @foreach($cars as $car)
                 <tr class="bg-white border-b">
                     <td class="px-6 py-2 text-center">{{ $car->model_name }}</td>
-                    <td class="px-6 py-2 text-center">{{ $car->price_per_day }} DH</td>
+                    <td class="px-6 py-2 text-center">{{ $car->price_per_day_short_term }} DH</td>
+                    <td class="px-6 py-2 text-center">{{ $car->price_per_day_long_term }} DH</td>
                     <td class="px-6 py-2 text-center">{{ $car->price_caution }} DH</td>
                     <td class="px-6 py-2 text-center">{{ $car->total_km }} KM</td>
                     <td class="px-6 py-2 text-center">{{ $car->transmission }}</td>
@@ -210,7 +218,8 @@
                         <button onclick="openEditModal({
     id: '{{ $car->id }}',
     model_name: '{{ $car->model_name }}',
-    price_per_day: '{{ $car->price_per_day }}',
+    price_per_day_short_term: '{{ $car->price_per_day_short_term }}',
+    price_per_day_long_term: '{{ $car->price_per_day_long_term }}',
     price_caution: '{{ $car->price_caution }}',
     total_km: '{{ $car->total_km }}',
     transmission: '{{ $car->transmission }}',
@@ -246,8 +255,12 @@
                     <label for="modelName">Nom du Modèle:</label>
                     <input type="text" id="modelName" name="model_name" class="mt-2 border p-2 w-full" required>
 
-                    <label for="pricePerDay">Prix par Jour:</label>
-                    <input type="number" id="pricePerDay" name="price_per_day" class="mt-2 border p-2 w-full"
+                    <label for="pricePerDay">Prix par Jour (-=3J):</label>
+                    <input type="number" id="pricePerDay" name="price_per_day_short_term" class="mt-2 border p-2 w-full"
+                        step="0.01" required>
+
+                    <label for="pricePerDay">Prix par Jour (+3J):</label>
+                    <input type="number" id="pricePerDay" name="price_per_day_long_term" class="mt-2 border p-2 w-full"
                         step="0.01" required>
 
                     <label for="priceCaution">Prix de Caution:</label>

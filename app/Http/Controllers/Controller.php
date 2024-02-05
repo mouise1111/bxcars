@@ -12,7 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
     public function index()
     {
-        $cars = Car::all(); // Récupère tous les véhicules
+        $cars = Car::all();
 
         return view('app', compact('cars'));
     }

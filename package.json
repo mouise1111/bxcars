@@ -16,6 +16,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@fontsource/lexend-tera": "^5.0.8"
+        "@fontsource/lexend-tera": "^5.0.8",
+        "jquery": "^3.7.1"
     }
 }

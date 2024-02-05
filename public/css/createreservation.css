@@ -1,0 +1,88 @@
+#selection {
+    position: absolute;
+    background-color: black;
+
+    transform: translate(-50%, -50%);
+}
+
+#selection-back {
+    position: absolute;
+    bottom: -125px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1334.89px;
+    height: 129.57px;
+    background-color: black;
+}
+
+.icons {
+    width: 20px;
+}
+
+.icons-2 {
+}
+
+.logo {
+    background-color: black;
+    font-family: "Lexend Tera", sans-serif;
+}
+
+@font-face {
+    font-family: "Lexend Tera";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+}
+
+body {
+    background-color: black;
+}
+
+/* Le reste du CSS reste inchangé */
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    /* Ajoute un peu de padding pour l'espacement */
+}
+
+.input-group input,
+.input-group select {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    background-color: #facc15;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    /* Espacement avant le bouton */
+}
+
+@media (min-width: 1024px) {
+    /* Ajustez selon votre point de rupture */
+    .input-group {
+        width: 100%;
+        /* Assure que le groupe d'input prend toute la largeur dans les petits écrans */
+    }
+}

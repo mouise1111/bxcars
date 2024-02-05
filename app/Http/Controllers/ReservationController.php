@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Reservation;
 use App\Models\Car;
 use Illuminate\Http\Request;
@@ -23,12 +24,37 @@ class ReservationController extends Controller
             'end_date.after_or_equal' => 'La date de fin doit être après ou égale à la date de début.',
         ]);
 
-        Reservation::create($validated);
-        session()->flash('success', 'Votre réservation a été effectuée avec succès !');
-        session()->flash('reservationSuccess', true);
+        $car = Car::find($validated['car_id']);
+        if (!$car) {
+            return back()->with('error', 'La voiture sélectionnée est invalide.');
+        }
 
-        return redirect()->back()->with('success', 'Votre demande de réservation a été soumise.');
+        $pricePerDayShortTerm = $car->price_per_day_short_term; // 350 DH
+        $pricePerDayLongTerm = $car->price_per_day_long_term; // 300 DH
+
+        $startDate = Carbon::parse($validated['start_date']);
+        $endDate = Carbon::parse($validated['end_date']);
+        $totalDays = $endDate->diffInDays($startDate) + 1;
+
+        // < or = 3 DAYS
+        if ($totalDays <= 3) {
+            $totalCost = $totalDays * $pricePerDayShortTerm;
+        } else {
+            // +3 DAYS
+            $totalCost = $totalDays * $pricePerDayLongTerm;
+        }
+
+
+        $validated['total_cost'] = $totalCost;
+        $reservation = Reservation::create($validated);
+
+        if ($reservation) {
+            return back()->with('success', "Votre réservation a été effectuée avec succès ! Le coût total est de $totalCost €.");
+        } else {
+            return back()->with('error', 'Une erreur est survenue lors de la création de votre réservation.');
+        }
     }
+
 
     public function accept($id)
     {
@@ -41,15 +67,16 @@ class ReservationController extends Controller
     public function reject($id)
     {
         $reservation = Reservation::findOrFail($id);
-        $reservation->update(['status' => 'rejected']);
-        // Rediriger vers le dashboard avec un message de succès
-        return redirect()->route('admin.dashboard')->with('success', 'Réservation rejetée.');
+        $reservation->delete();
+
+        session()->flash('success', 'Réservation supprimée avec succès.');
+        return redirect()->route('dashboard');
     }
+
 
     public function dashboard()
     {
-        $reservations = Reservation::where('status', 'pending')->get(); // Récupère uniquement les réservations en attente
-        // ou $reservations = Reservation::all(); pour récupérer toutes les réservations
+        $reservations = Reservation::where('status', 'pending')->get();
         $reservations = Reservation::with('car')->get();
         return view('dashboard', compact('reservations'));
     }
@@ -59,7 +86,6 @@ class ReservationController extends Controller
     {
         $car = Car::find($carId);
         if (!$car) {
-            // Gérer le cas où la voiture n'existe pas
             return redirect()->route('home')->with('error', 'Voiture non trouvée.');
         }
         $model_name = $car->model_name;

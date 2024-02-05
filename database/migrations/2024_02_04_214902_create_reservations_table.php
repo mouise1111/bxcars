@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->enum('pickup_location', ['airport', 'agency', 'other_city']);
             $table->date('start_date');
             $table->date('end_date');
+            $table->decimal('total_cost', 8, 2);
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
         });
@@ -31,5 +32,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('reservations');
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->dropColumn('total_cost');
+        });
     }
 };

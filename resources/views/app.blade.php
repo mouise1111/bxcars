@@ -13,11 +13,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6vP0kZfSfQLz2Whle6PvjeK9fuT+9HbR4uPm3IjB4z1EW2koqT92yWfJYF8Dg3j" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite('resources/css/app.css')
 </head>
 
 <body>
+    <a href="https://wa.me/NUMERO_DE_TELEPHONE?text=Bonjour, j'aimerais obtenir plus d'informations."
+        class="whatsapp-icon" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
     <section class="relative h-screen text-white bg-black"
         style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
@@ -29,15 +35,29 @@
                 <div class="w-8 h-0.5 bg-white"></div>
             </div>
             <a href="/" class="text-3xl text-white uppercase logo">bxcars</a>
-            <button
-                class="px-4 py-2 transition-colors border-2 border-white hover:bg-gray-500 hover:text-black rounded-3xl">
-                <a href="login" class="p-2 text-white">Connexion</a>
-            </button>
+            <div>
+                @if(Route::has('login'))
+                @auth
+                <span class="text-white pr-4 hover:text-yellow-500"
+                    onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @else
+                <button
+                    class="px-4 py-2 transition-colors border-2 border-white hover:bg-gray-500 hover:text-black rounded-3xl">
+                    <a href="{{ route('login') }}" class="p-2 text-white">Connexion</a>
+                </button>
+                @endauth
+                @endif
+            </div>
         </nav>
         <h1 class="text-5xl font-bold text-center lg:px-32">
             Votre clé pour explorer le Maroc, confort et liberté garantis
         </h1>
-        <!-- make this background 90% + see figma for more effects on this -->
         <div class="py-4 text-black bg-white/70 rounded-3xl backdrop-blur-3xl" id="selection-back"></div>
         <div class="z-10 flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl" id="selection">
             <div class="flex flex-col">
@@ -49,7 +69,7 @@
             </div>
             <div class="flex flex-col">
                 <div>
-                    <h3 class="font-medium">Pick-up date</h3>
+                    <h3 class="font-medium">Pick-up date </h3>
                     <input placeholder="Search a location"
                         class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
                 </div>
@@ -82,6 +102,16 @@
             expérience de conduite confortable et à la pointe de la technologie.
         </h3>
 
+        @if(Route::has('login'))
+        @auth
+        <div class="flex justify-center mt-6">
+            <a href="{{ url('/cars/create') }}"
+                class="bg-yellow-500 text-2xl text-white px-6 py-3 rounded transition duration-500 hover:bg-black">Gestion
+                de véhicules</a>
+        </div>
+        @endauth
+        @endif
+
 
         <div class="grid grid-cols-3 grid-rows-2 gap-4 lg:px-20 mt-20">
             @foreach ($cars as $car)
@@ -90,11 +120,27 @@
                 <div class="p-2">
                     <h4 class="text-lg font-semibold p">{{ $car->model_name }}</h4>
                     <div class="flex flex-row items-end">
-                        <h5 class="text-4xl font-bold">{{ number_format($car->price_per_day, 0, '.', '') }} DH<span
-                                class="text-xl font-medium text-gray-800"> /jour</span></h5>
-                        <span class="text-sm text-gray-500 ml-2">Caution: {{ number_format($car->price_caution, 0, '.',
-                            '') }} DH</span>
+                        <!-- Colonne de gauche pour le prix par jour à long terme -->
+                        <div class="flex flex-col mr-4">
+                            <h5 class="text-4xl font-bold">
+                                {{ number_format($car->price_per_day_long_term, 0, '.', '') }} DH
+                                <span class="text-xl font-medium text-gray-800">/jour</span>
+                            </h5>
+                        </div>
+
+                        <!-- Colonne de droite pour les détails supplémentaires -->
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">
+                                trois jours et moins : {{ number_format($car->price_per_day_short_term, 0, '.', '') }}
+                                DH
+                            </span>
+                            <span class="text-sm text-gray-500">
+                                Caution: {{ number_format($car->price_caution, 0, '.', '') }} DH
+                            </span>
+                        </div>
                     </div>
+
+
                     <div
                         class="flex flex-row items-center content-center justify-between px-8 py-2 my-4 bg-gray-100 rounded-xl">
                         <div class="flex flex-col">
@@ -127,7 +173,6 @@
                         class="block w-full px-4 py-2 text-center text-white bg-red-600 border-2 border-red-600 rounded-3xl">
                         Indisponible</p>
                     @else
-                    <!-- Supprimez cette boucle intérieure, elle est inutile et cause la duplication -->
                     <a href="{{ route('reservation.create', ['car' => $car->id]) }}"
                         class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
                         Louer
@@ -242,7 +287,7 @@
             <h1 class="text-3xl uppercase logo">Bxcars</h1>
         </div>
         <div class="flex justify-between gap-4 ">
-            <a href="/about" class="text-gray-300 transition-colors hover:text-white">About</a>
+            <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">About</a>
             <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
         </div>
 
@@ -265,40 +310,3 @@
 <script>
     import "@fontsource/lexend-tera";
 </script>
-<style>
-    #selection {
-        position: absolute;
-        bottom: -125px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    #selection-back {
-        position: absolute;
-        bottom: -125px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 1334.89px;
-        height: 129.57px;
-    }
-
-    .icons {
-        width: 20px;
-    }
-
-    .icons-2 {
-        width: 28px;
-    }
-
-    .logo {
-        font-family: "Lexend Tera", sans-serif;
-
-    }
-
-    @font-face {
-        font-family: "Lexend Tera";
-        font-style: normal;
-        font-weight: 400;
-        font-display: block;
-    }
-</style>

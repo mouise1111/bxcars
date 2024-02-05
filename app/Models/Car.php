@@ -9,7 +9,8 @@ class Car extends Model
 {
     protected $fillable = [
         'model_name',
-        'price_per_day',
+        'price_per_day_short_term',
+        'price_per_day_long_term',
         'price_caution',
         'total_km',
         'transmission',
@@ -26,7 +27,7 @@ class Car extends Model
             return asset('storage/cars/' . $this->photo);
         }
 
-        return null; // Ou un chemin vers une image par défaut
+        return null;
     }
     use HasFactory;
 }

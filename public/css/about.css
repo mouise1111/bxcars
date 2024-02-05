@@ -1,0 +1,36 @@
+.logo {
+    color: white; /* Change la couleur du texte du logo pour une meilleure visibilité */
+    font-family: "Lexend Tera", sans-serif;
+    font-size: 24px; /* Ajuste la taille du texte du logo */
+}
+
+/* Ajoutez cette règle pour assurer que l'image de fond couvre bien toute la page */
+html,
+body {
+    height: 100%; /* Assure que le corps prend toute la hauteur de la fenêtre */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Améliorations pour le footer */
+footer {
+    background-color: #222; /* Assure un fond sombre pour le footer */
+    color: white; /* Texte blanc pour le footer */
+    padding: 20px 0; /* Ajoute du padding au footer */
+}
+
+.icons {
+    width: 20px;
+}
+
+.icons-2 {
+    width: 28px;
+}

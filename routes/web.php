@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('app', compact('cars')); // Passe les cars à la vue
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -40,7 +44,8 @@ Route::patch('/cars/{car}', [CarController::class, 'update'])->name('cars.update
 Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name('reservation.create');
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'accept'])->name('admin.reservations.accept');
-Route::patch('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name('admin.reservations.reject');
+Route::post('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name('reservations.reject');
+
 Route::get('/dashboard', [ReservationController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name('reservation.create');
