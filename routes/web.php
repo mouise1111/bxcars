@@ -1,7 +1,8 @@
 <?php
-
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -36,6 +37,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/cars/{car}/edit', [CarController::class, 'edit'])->name('cars.edit');
 Route::patch('/cars/{car}', [CarController::class, 'update'])->name('cars.update');
 
+Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name('reservation.create');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+Route::patch('/reservations/{id}/accept', [ReservationController::class, 'accept'])->name('admin.reservations.accept');
+Route::patch('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name('admin.reservations.reject');
+Route::get('/dashboard', [ReservationController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name('reservation.create');
 
 
 require __DIR__ . '/auth.php';

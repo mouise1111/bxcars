@@ -31,7 +31,7 @@
             <a href="/" class="text-3xl text-white uppercase logo">bxcars</a>
             <button
                 class="px-4 py-2 transition-colors border-2 border-white hover:bg-gray-500 hover:text-black rounded-3xl">
-                <a href="login" class="p-2 text-white">Login / Register</a>
+                <a href="login" class="p-2 text-white">Connexion</a>
             </button>
         </nav>
         <h1 class="text-5xl font-bold text-center lg:px-32">
@@ -127,15 +127,17 @@
                         class="block w-full px-4 py-2 text-center text-white bg-red-600 border-2 border-red-600 rounded-3xl">
                         Indisponible</p>
                     @else
-                    <button
+                    <!-- Supprimez cette boucle intérieure, elle est inutile et cause la duplication -->
+                    <a href="{{ route('reservation.create', ['car' => $car->id]) }}"
                         class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
                         Louer
-                    </button>
+                    </a>
                     @endif
                 </div>
             </div>
             @endforeach
         </div>
+
 
         </div>
 
@@ -152,10 +154,10 @@
     </section>
 
     <section class="px-32 py-32">
-        <h1 class="text-5xl font-semibold text-center">How it works</h1>
+        <h1 class="text-5xl font-semibold text-center">Comment ça marche</h1>
         <h3 class="mt-4 text-lg text-center lg:px-56">
-            Renting a luxury car has never been easier. Our streamlined process makes it simple for you to book and
-            confirm your vehicle of choice online
+            Louer une voiture au Maroc n'a jamais été aussi simple. Notre processus optimisé rend la réservation et la
+            confirmation de votre véhicule de choix en ligne facile et rapide.
         </h3>
 
         <div class="flex flex-row mt-16">
@@ -165,10 +167,9 @@
                         <img src="/search.png" alt="mangnifier icon for search" class="icons-2">
                     </div>
                     <div class="flex flex-col w-full gap-4">
-                        <h3 class="text-xl font-semibold">Browse and select</h3>
-                        <p>Choose from our wide range of premium cars, select the pickup and return dates and
-                            locations
-                            that suit you best.</p>
+                        <h3 class="text-xl font-semibold">Parcourez et sélectionnez</h3>
+                        <p>Choisissez parmi notre gamme de voitures, sélectionnez les dates et les lieux de prise en
+                            charge qui vous conviennent le mieux.</p>
                     </div>
                 </div>
                 <div class="flex flex-row items-center gap-4 p-8 bg-white border-2 border-gray rounded-3xl ">
@@ -176,10 +177,10 @@
                         <img src="/calendar.png" alt="calendar icon" class="icons-2 ">
                     </div>
                     <div class="flex flex-col gap-4">
-                        <h3 class="text-xl font-semibold">Book and confirm</h3>
-                        <p>Book your desired car with just a few clicks and receive an instant confirmation via
-                            email or
-                            SMS.</p>
+                        <h3 class="text-xl font-semibold">
+                            Réservez et confirmez</h3>
+                        <p>Réservez la voiture de votre choix en seulement quelques clics et recevez une confirmation
+                            instantanée par e-mail ou SMS.</p>
                     </div>
                 </div>
                 <div class="z-10 flex flex-row items-center gap-4 p-8 mb-16 bg-white border-2 border-gray rounded-3xl">
@@ -187,10 +188,9 @@
                         <img src="/face-happy.png" alt="smiley icon" class="icons-2 ">
                     </div>
                     <div class="flex flex-col gap-4">
-                        <h3 class="text-xl font-semibold">Enjoy your ride</h3>
-                        <p>Pick up your car at the designated location and enjoy your premium driving experience
-                            with
-                            our top-quality service.</p>
+                        <h3 class="text-xl font-semibold">Profitez de votre trajet</h3>
+                        <p>Récupérez votre voiture à l'emplacement désigné et profitez de votre expérience de conduite
+                            haut de gamme avec notre service de qualité supérieure.</p>
                     </div>
                 </div>
 
