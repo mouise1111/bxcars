@@ -15,85 +15,102 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6vP0kZfSfQLz2Whle6PvjeK9fuT+9HbR4uPm3IjB4z1EW2koqT92yWfJYF8Dg3j" crossorigin="anonymous">
+    <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite('resources/css/app.css')
 </head>
 
 <body>
-    <a href="https://wa.me/NUMERO_DE_TELEPHONE?text=Bonjour, j'aimerais obtenir plus d'informations."
-        class="whatsapp-icon" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-    <section class="relative h-screen text-white bg-black"
+    <div class="relative h-screen bg-black"
         style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-
-        {{-- <img src="/car-hero.png" alt="black car front view"> --}}
-        <nav class="flex flex-row justify-between py-8 lg:px-20">
-            <div class="space-y-2">
-                <div class="w-8 h-0.5 bg-white"></div>
-                <div class="w-8 h-0.5 bg-white"></div>
-                <div class="w-8 h-0.5 bg-white"></div>
-            </div>
-            <a href="/" class="text-3xl text-white uppercase logo">bxcars</a>
-            <div>
-                @if(Route::has('login'))
-                @auth
-                <span class="text-white pr-4 hover:text-yellow-500"
-                    onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                @else
-                <button
-                    class="px-4 py-2 transition-colors border-2 border-white hover:bg-gray-500 hover:text-black rounded-3xl">
-                    <a href="{{ route('login') }}" class="p-2 text-white">Connexion</a>
+        <div x-data="{ open: false }">
+            <nav class="flex justify-between items-center py-8 px-4">
+                <button @click="open = !open" class="space-y-2 focus:outline-none">
+                    <!-- Icône du menu (hamburger) -->
+                    <div class="w-8 h-0.5 bg-white"></div>
+                    <div class="w-8 h-0.5 bg-white"></div>
+                    <div class="w-8 h-0.5 bg-white"></div>
                 </button>
-                @endauth
-                @endif
+                <!-- Logo -->
+                <a href="/" class="text-3xl uppercase logo text-white">bxcars</a>
+                <div>
+                    @if(Route::has('login'))
+                    @auth
+                    <span class="text-white pr-4 hover:text-yellow-500"
+                        onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    @else
+                    <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="text-white hover:text-yellow-500">Inscription</a>
+                    @endif
+                    @endauth
+                    @endif
+                </div>
+            </nav>
+
+
+            <div class="absolute top-0 left-0 w-60 h-screen bg-black transform transition-transform duration-200"
+                :class="{'-translate-x-full': !open, 'translate-x-0': open}">
+                <button @click="open = false" class="text-white p-4">
+                    Fermer
+                </button>
+                <div class="flex flex-col p-4">
+                    <a href="#" class="py-2 text-white hover:text-yellow-500">Accueil</a>
+                    <a href="{{ url('/services') }}" class="py-2 text-white hover:text-yellow-500">Services</a>
+                    <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À propos</a>
+                    <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                </div>
             </div>
-        </nav>
-        <h1 class="text-5xl font-bold text-center lg:px-32">
+
+        </div>
+        <h1 class="text-5xl mt-20 font-bold text-white text-center lg:px-32">
             Votre clé pour explorer le Maroc, confort et liberté garantis
         </h1>
-        <div class="py-4 text-black bg-white/70 rounded-3xl backdrop-blur-3xl" id="selection-back"></div>
-        <div class="z-10 flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl" id="selection">
-            <div class="flex flex-col">
-                <div>
-                    <h3 class="font-medium">Pick-up location</h3>
-                    <input placeholder="Search a location"
-                        class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div>
-                    <h3 class="font-medium">Pick-up date </h3>
-                    <input placeholder="Search a location"
-                        class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <h3 class="font-medium">Drop-off location</h3>
+    </div>
+
+
+    <div class="py-4 text-black bg-white/70 rounded-3xl backdrop-blur-3xl" id="selection-back"></div>
+    <div class="z-10 flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl" id="selection">
+        <div class="flex flex-col">
+            <div>
+                <h3 class="font-medium">Pick-up location</h3>
                 <input placeholder="Search a location"
                     class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
             </div>
-            <div class="flex flex-col">
-                <div>
-                    <h3 class="font-medium">Drop-off date</h3>
-                    <input placeholder="Search a location"
-                        class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-                </div>
-            </div>
-            <div class="flex flex-col justify-end min-w-fit lg:mr-12">
-                <a href="/">
-                    <button class="text-white transition-colors bg-black rounded-3xl hover:bg-gray-500">
-                        <h4 class="w-full px-8 py-4">Find a Vehicle</h4>
-                    </button>
-                </a>
+        </div>
+        <div class="flex flex-col">
+            <div>
+                <h3 class="font-medium">Pick-up date </h3>
+                <input placeholder="Search a location"
+                    class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
             </div>
         </div>
+        <div class="flex flex-col">
+            <h3 class="font-medium">Drop-off location</h3>
+            <input placeholder="Search a location"
+                class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
+        </div>
+        <div class="flex flex-col">
+            <div>
+                <h3 class="font-medium">Drop-off date</h3>
+                <input placeholder="Search a location"
+                    class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
+            </div>
+        </div>
+        <div class="flex flex-col justify-end min-w-fit lg:mr-12">
+            <a href="/">
+                <button class="text-white transition-colors bg-black rounded-3xl hover:bg-gray-500">
+                    <h4 class="w-full px-8 py-4">Find a Vehicle</h4>
+                </button>
+            </a>
+        </div>
+    </div>
     </section>
     <section class="py-32 text-black bg-gray-100">
         <h1 class="text-5xl font-semibold text-center">Notre collection de voitures</h1>
@@ -120,7 +137,6 @@
                 <div class="p-2">
                     <h4 class="text-lg font-semibold p">{{ $car->model_name }}</h4>
                     <div class="flex flex-row items-end">
-                        <!-- Colonne de gauche pour le prix par jour à long terme -->
                         <div class="flex flex-col mr-4">
                             <h5 class="text-4xl font-bold">
                                 {{ number_format($car->price_per_day_long_term, 0, '.', '') }} DH
@@ -128,10 +144,9 @@
                             </h5>
                         </div>
 
-                        <!-- Colonne de droite pour les détails supplémentaires -->
                         <div class="flex flex-col">
                             <span class="text-sm text-gray-500">
-                                trois jours et moins : {{ number_format($car->price_per_day_short_term, 0, '.', '') }}
+                                Trois jours et moins : {{ number_format($car->price_per_day_short_term, 0, '.', '') }}
                                 DH
                             </span>
                             <span class="text-sm text-gray-500">
@@ -174,7 +189,7 @@
                         Indisponible</p>
                     @else
                     <a href="{{ route('reservation.create', ['car' => $car->id]) }}"
-                        class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-black hover:text-white">
+                        class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-green-500 hover:text-white">
                         Louer
                     </a>
                     @endif
@@ -188,13 +203,10 @@
 
         </div>
         <div class="flex justify-center lg:py-12">
-
-            <a href="/cars">
-                <button
-                    class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black">
-                    <h4 class="w-full px-8 py-4">Voir plus</h4>
-                </button>
-            </a>
+            <button id="voirPlusBtn"
+                class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black">
+                <h4 class="w-full px-8 py-4">Voir plus</h4>
+            </button>
         </div>
     </section>
 
@@ -304,9 +316,20 @@
             <img src="" alt="">
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var btnVoirPlus = document.getElementById('voirPlusBtn');
+            if (btnVoirPlus) {
+                btnVoirPlus.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    alert("L'agence ne possède actuellement que " + {{ $totalCars }} + " véhicules.");
+            });
+        }
+    });
+    </script>
+
+
+
 </body>
 
 </html>
-<script>
-    import "@fontsource/lexend-tera";
-</script>

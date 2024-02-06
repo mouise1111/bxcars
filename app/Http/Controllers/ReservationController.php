@@ -24,6 +24,10 @@ class ReservationController extends Controller
             'end_date.after_or_equal' => 'La date de fin doit être après ou égale à la date de début.',
         ]);
 
+        if (!$this->isCarAvailable($validated['car_id'], $validated['start_date'], $validated['end_date'])) {
+            return back()->with('error', 'Ce véhicule n\'est pas disponible pour les dates sélectionnées.');
+        }
+
         $car = Car::find($validated['car_id']);
         if (!$car) {
             return back()->with('error', 'La voiture sélectionnée est invalide.');
@@ -36,14 +40,11 @@ class ReservationController extends Controller
         $endDate = Carbon::parse($validated['end_date']);
         $totalDays = $endDate->diffInDays($startDate) + 1;
 
-        // < or = 3 DAYS
         if ($totalDays <= 3) {
             $totalCost = $totalDays * $pricePerDayShortTerm;
         } else {
-            // +3 DAYS
             $totalCost = $totalDays * $pricePerDayLongTerm;
         }
-
 
         $validated['total_cost'] = $totalCost;
         $reservation = Reservation::create($validated);
@@ -55,15 +56,35 @@ class ReservationController extends Controller
         }
     }
 
+    private function isCarAvailable($carId, $startDate, $endDate)
+    {
+        $overlappingReservations = Reservation::where('car_id', $carId)
+            ->where('status', 'accepted')
+            ->where(function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('start_date', [$startDate, $endDate])
+                    ->orWhereBetween('end_date', [$startDate, $endDate])
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                        $query->where('start_date', '<', $startDate)
+                            ->where('end_date', '>', $endDate);
+                    });
+            })
+            ->count();
+
+        return $overlappingReservations === 0;
+    }
+
+
 
     public function accept($id)
     {
         $reservation = Reservation::findOrFail($id);
-        $reservation->update(['status' => 'accepted']);
-        // Rediriger vers le dashboard avec un message de succès
-        return redirect()->route('admin.dashboard')->with('success', 'Réservation acceptée.');
-    }
+        $reservation->status = 'accepted';
+        $reservation->save();
 
+        // Email Confirmation... (NOT DONE)
+
+        return back()->with('success', 'La réservation a été acceptée avec succès.');
+    }
     public function reject($id)
     {
         $reservation = Reservation::findOrFail($id);

@@ -72,11 +72,15 @@
                             <p>Email : info@bxcars.be</p>
                             <hr class="mt-5">
                             <div class="flex items-center justify-center mt-5">
-                                <button
-                                    class="bg-yellow-500 text-2xl text-white px-10 py-3 rounded transition duration-500 hover:bg-black mr-1.5">RETOUR</button>
-                                <button
-                                    class="bg-yellow-500 text-2xl text-white px-5 py-3 rounded transition duration-500 hover:bg-black ml-1.5">À
-                                    PROPOS DE NOUS</button>
+                                <a href="{{ url('/') }}"
+                                    class="bg-yellow-500 text-2xl text-white px-10 py-3 rounded transition duration-500 hover:bg-black mr-1.5 inline-block">
+                                    RETOUR
+                                </a>
+                                <a href="{{ url('/about') }}"
+                                    class="bg-yellow-500 text-2xl text-white px-5 py-3 rounded transition duration-500 hover:bg-black ml-1.5 inline-block">
+                                    À PROPOS DE NOUS
+                                </a>
+
                             </div>
                         </div>
                     </div>

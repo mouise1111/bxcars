@@ -40,40 +40,35 @@
             <ul class="md:flex md:items-center md:static absolute bg-black w-full left-0 md:py-0 py-4 md:pl-0 pl-7 top-[60px] hidden"
                 style="background-color: black;">
                 <li class="mx-4 my-0 md:my-0 bg-black">
-                    <a href="{{ url('/dashboard') }}" class="text x1 hover:text-yellow-500 duration-500"
-                        style="background-color: black;">DASHBOARD</a>
+                    <a href="{{ url('/') }}" class="text x1 hover:text-yellow-500 duration-500">Accueil</a>
                 </li>
                 <li class="mx-4 my-0 md:my-0 bg-black">
-                    <a href="{{ url('/rankings') }}" class="text x1 hover:text-yellow-500 duration-500"
+                    <a href="{{ url('/dashboard') }}" class="text x1 hover:text-yellow-500 duration-500"
                         style="background-color: black;">Réservations</a>
+                </li>
+                <li class="mx-4 my-0 md:my-0 bg-black">
+                    <a href="{{ url('/membres') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        style="background-color: black;">Membres</a>
                 </li>
                 <li class="mx-4 my-0 md:my-0 bg-black">
                     <a href="{{ url('/cars/create') }}" class="text x1 text-yellow-500"
                         style="background-color: black;">MyCARS</a>
                 </li>
             </ul>
-            <!--Login list icon-->
-            <!--Login list icon-->
             <div class="sm:fixed sm:top-0 sm:right-0 p-4 text-right z-10">
                 @if (Route::has('login'))
                 @auth
-                <!-- User Name -->
                 <span class="text-white pr-4 hover:text-yellow-500"
                     onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
-
-                <!-- Logout Icon -->
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
                 </a>
-
-                <!-- Logout Form -->
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
                 @endauth
                 @endif
             </div>
-
     </nav>
 </header>
 
@@ -177,7 +172,7 @@
         </div>
     </div>
 
-    <div class="cars-container mt-4 px-40">
+    <div class="cars-container mt-4 px-80">
         @if(isset($cars))
         <table class="min-w-full table-auto border-collapse">
             <thead class="bg-gray-800 text-white">
@@ -191,7 +186,6 @@
                     <th class="px-6 py-2 text-center">Sièges</th>
                     <th class="px-6 py-2 text-center">Carburant</th>
                     <th class="px-6 py-2 text-center">Image</th>
-                    <th class="px-6 py-2 text-center">Disponibilité<br>1 = Oui<br>0 = Non</th>
                     <th class="px-6 py-2 text-center">Actions</th>
 
                 </tr>
@@ -213,7 +207,6 @@
                             alt="Car Image">
                         @endif
                     </td>
-                    <td class="px-6 py-2 text-center">{{ $car->disponible }}</td>
                     <td class="px-6 py-2 text-center">
                         <button onclick="openEditModal({
     id: '{{ $car->id }}',
@@ -256,12 +249,12 @@
                     <input type="text" id="modelName" name="model_name" class="mt-2 border p-2 w-full" required>
 
                     <label for="pricePerDay">Prix par Jour (-=3J):</label>
-                    <input type="number" id="pricePerDay" name="price_per_day_short_term" class="mt-2 border p-2 w-full"
-                        step="0.01" required>
+                    <input type="number" id="pricePerDayShortTerm" name="price_per_day_short_term"
+                        class="mt-2 border p-2 w-full" step="0.01" required>
 
                     <label for="pricePerDay">Prix par Jour (+3J):</label>
-                    <input type="number" id="pricePerDay" name="price_per_day_long_term" class="mt-2 border p-2 w-full"
-                        step="0.01" required>
+                    <input type="number" id="pricePerDayLongTerm" name="price_per_day_long_term"
+                        class="mt-2 border p-2 w-full" step="0.01" required>
 
                     <label for="priceCaution">Prix de Caution:</label>
                     <input type="number" id="priceCaution" name="price_caution" class="mt-2 border p-2 w-full"
@@ -275,6 +268,7 @@
                         <option value="Manuel">Manuel</option>
                         <option value="Automatique">Automatique</option>
                     </select>
+
 
                     <label for="seats">Nombre de Places:</label>
                     <input type="number" id="seats" name="seats" class="mt-2 border p-2 w-full" required>
@@ -309,5 +303,66 @@
             </div>
         </div>
     </div>
+
+
+    <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <h1 class="text-2xl font-semibold text-gray-900">Gestion de la disponibilité du véhicule</h1>
+        <div class="mt-8">
+            <div class="flex flex-col">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <!-- Centre le texte des en-têtes -->
+                                        <th scope="col"
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Véhicule (Tot. KM)
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Statut
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach ($cars as $car)
+                                    <tr>
+                                        <!-- Centre le texte des cellules -->
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
+                                            {{ $car->model_name }} ({{ $car->total_km }})
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                            {{ $car->disponible ? 'Disponible' : 'En location' }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
+                                            <form method="POST"
+                                                action="{{ route('admin.cars.toggle_availability', $car->id) }}">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="text-indigo-600 hover:text-indigo-900">
+                                                    {{ $car->disponible ? 'Rendre indisponible' : 'Rendre disponible' }}
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </main>
 <script src="{{ asset('js/create.js') }}"></script>

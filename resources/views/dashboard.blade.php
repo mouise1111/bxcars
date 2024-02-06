@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard - BX Cars</title>
+    <title>Réservations - BX Cars</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -38,32 +38,22 @@
                 <!--Navigation list -->
                 <ul class="md:flex md:items-center md:static absolute bg-black w-full left-0 md:py-0 py-4 md:pl-0 pl-7 top-[60px] hidden"
                     style="background-color: black;">
+
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/dashboard') }}" class="text x1 text-yellow-500"
-                            style="background-color: black;">DASHBOARD</a>
+                        <a href="{{ url('/') }}" class="text x1 hover:text-yellow-500 duration-500">Accueil</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/rankings') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        <a href="{{ url('/dashboard') }}" class="text x1 text-yellow-500"
                             style="background-color: black;">Réservations</a>
+                    </li>
+                    <li class="mx-4 my-0 md:my-0 bg-black">
+                        <a href="{{ url('/membres') }}" class="text x1 hover:text-yellow-500 duration-500"
+                            style="background-color: black;">Membres</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
                         <a href="{{ url('/cars/create') }}" class="text x1 hover:text-yellow-500 duration-500"
                             style="background-color: black;">MyCARS</a>
                     </li>
-                    @if(auth()->check() && (auth()->user()->admin === 0))
-                    <p class="hidden md:inline">|</p>
-                    <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/myteam') }}" class="text x1 hover:text-yellow-500 duration-500"
-                            style="background-color: black;">MyTEAM</a>
-                    </li>
-                    @endif
-                    @if(auth()->check() && (auth()->user()->admin === 1))
-                    <p class="hidden md:inline">|</p>
-                    <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/admins') }}" class="text x1 hover:text-yellow-500 duration-500"
-                            style="background-color: black;">MyADMIN</a>
-                    </li>
-                    @endif
                 </ul>
                 <div class="sm:fixed sm:top-0 sm:right-0 p-4 text-right z-10">
                     @if (Route::has('login'))
@@ -134,7 +124,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($reservations as $reservation)
+                                        @foreach($reservations->where('status', 'pending') as $reservation)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $reservation->first_name }} {{ $reservation->last_name }}
@@ -154,10 +144,13 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $reservation->start_date }}
+                                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
+                                                F Y') }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $reservation->end_date }}
+                                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j
+                                                F Y') }}
+
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ number_format($reservation->total_cost, 0, '.','') }} DH
@@ -201,9 +194,6 @@
             </div>
         </div>
 
-
-        {{-- resources/views/admin/reservations.blade.php --}}
-
         <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <h1 class="text-2xl font-semibold text-gray-900">Réservations confirmées</h1>
             <div class="mt-8">
@@ -216,20 +206,13 @@
                                         <tr>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Nom
-                                            </th>
+                                                Nom</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Véhicule
-                                            </th>
+                                                Véhicule</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Numéro de téléphone
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Email
-                                            </th>
+                                                Montant</th>
                                             <th scope="col"
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Date de début
@@ -238,14 +221,11 @@
                                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Date de fin
                                             </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Paiement
-                                            </th>
+
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($reservations as $reservation)
+                                        @foreach($reservations->where('status', 'accepted') as $reservation)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $reservation->first_name }} {{ $reservation->last_name }}
@@ -253,25 +233,39 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $reservation->car->model_name ?? 'N/A' }}<br>{{
                                                 $reservation->car->total_km ?? 'N/A' }} KM
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->phone }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->email }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                Oui
-                                            </td>
+                                                <form
+                                                    action="{{ route('admin.cars.toggle_availability', $reservation->car->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <div class="mt-4">
+                                                        <label class="inline-flex items-center">
+                                                            <input type="radio" name="disponible" value="1" {{
+                                                                $reservation->car->disponible ? 'checked' : '' }}>
+                                                            <span class="ml-2">Disponible</span>
+                                                        </label>
+                                                        <label class="inline-flex items-center">
+                                                            <input type="radio" name="disponible" value="0" {{
+                                                                !$reservation->car->disponible ? 'checked' : '' }}>
+                                                            <span class="ml-2">Indisponible</span>
+                                                        </label>
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="mt-2 px-4 py-2 text-sm text-white bg-blue-500 rounded">Mettre
+                                                        à jour</button>
+                                                </form>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $reservation->start_date }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $reservation->end_date }}
+                                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
+                                                F Y') }}
                                             </td>
-
-                                            </form>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j F
+                                                Y') }}
                                             </td>
                                         </tr>
                                         @endforeach
@@ -283,6 +277,5 @@
                 </div>
             </div>
         </div>
-    </main>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
+        <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>

@@ -38,8 +38,6 @@ body {
     background-color: black;
 }
 
-/* Le reste du CSS reste inchangé */
-
 .reservation-form {
     display: flex;
     flex-direction: column;
@@ -58,7 +56,6 @@ body {
     flex-direction: column;
     gap: 0.5rem;
     padding: 0 1rem;
-    /* Ajoute un peu de padding pour l'espacement */
 }
 
 .input-group input,
@@ -76,13 +73,10 @@ body {
     border-radius: 0.5rem;
     cursor: pointer;
     margin-top: 1rem;
-    /* Espacement avant le bouton */
 }
 
 @media (min-width: 1024px) {
-    /* Ajustez selon votre point de rupture */
     .input-group {
         width: 100%;
-        /* Assure que le groupe d'input prend toute la largeur dans les petits écrans */
     }
 }

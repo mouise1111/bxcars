@@ -11,8 +11,10 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::all();
-        return view('app', compact('cars'));
+        $totalCars = Car::count();
+        return view('app', compact('cars', 'totalCars'));
     }
+
 
     public function create()
     {
@@ -77,7 +79,8 @@ class CarController extends Controller
     {
         $validatedData = $request->validate([
             'model_name' => 'required|string|max:255',
-            'price_per_day' => 'required|numeric',
+            'price_per_day_short_term' => 'required|numeric',
+            'price_per_day_long_term' => 'required|numeric',
             'price_caution' => 'required|numeric',
             'total_km' => 'required|numeric',
             'transmission' => 'required|string',
@@ -121,4 +124,12 @@ class CarController extends Controller
 
         return redirect()->route('cars.index')->with('success', 'Car deleted successfully');
     }
+    public function toggleAvailability(Car $car)
+    {
+        $car->disponible = !$car->disponible;
+        $car->save();
+
+        return back()->with('success', 'La disponibilité du véhicule a été mise à jour.');
+    }
+
 }
