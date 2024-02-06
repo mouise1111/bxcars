@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\MembreController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -68,5 +69,6 @@ Route::get('/maintenance-control', function () {
     return view('OnOffMaintenance');
 })->middleware('auth');
 
+Route::get('send-email-pdf', [PDFController::class, 'index']);
 
 require __DIR__ . '/auth.php';

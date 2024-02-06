@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Reservation;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use PDF;
+use Mail;
 
 class ReservationController extends Controller
 {
@@ -81,17 +83,23 @@ class ReservationController extends Controller
         $reservation->status = 'accepted';
         $reservation->save();
 
-        // Email Confirmation... (NOT DONE)
+        // Générer le PDF
+        $pdf = PDF::loadView('emails.reservation_pdf', ['reservation' => $reservation]);
 
-        return back()->with('success', 'La réservation a été acceptée avec succès.');
-    }
-    public function reject($id)
-    {
-        $reservation = Reservation::findOrFail($id);
-        $reservation->delete();
+        // L'email du destinataire est directement un champ de la réservation
+        $to_email = $reservation->email; // Utilisez directement l'email de la réservation
 
-        session()->flash('success', 'Réservation supprimée avec succès.');
-        return redirect()->route('dashboard');
+        $data = [
+            'reservation' => $reservation // Passer l'objet reservation complet
+        ];
+
+        Mail::send('emails.reservation.confirmation', $data, function ($message) use ($pdf, $reservation) {
+            $message->to($reservation->email)
+                ->subject('Confirmation de Réservation')
+                ->attachData($pdf->output(), "confirmation_reservation.pdf");
+        });
+
+        return back()->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
     }
 
 

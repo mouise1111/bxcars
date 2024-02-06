@@ -75,41 +75,7 @@
     </div>
 
 
-    <div class="py-4 text-black bg-white/70 rounded-3xl backdrop-blur-3xl" id="selection-back"></div>
-    <div class="z-10 flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl" id="selection">
-        <div class="flex flex-col">
-            <div>
-                <h3 class="font-medium">Pick-up location</h3>
-                <input placeholder="Search a location"
-                    class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-            </div>
-        </div>
-        <div class="flex flex-col">
-            <div>
-                <h3 class="font-medium">Pick-up date </h3>
-                <input placeholder="Search a location"
-                    class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-            </div>
-        </div>
-        <div class="flex flex-col">
-            <h3 class="font-medium">Drop-off location</h3>
-            <input placeholder="Search a location"
-                class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-        </div>
-        <div class="flex flex-col">
-            <div>
-                <h3 class="font-medium">Drop-off date</h3>
-                <input placeholder="Search a location"
-                    class="p-2 text-black bg-white border-2 border-gray-300 rounded-lg" />
-            </div>
-        </div>
-        <div class="flex flex-col justify-end min-w-fit lg:mr-12">
-            <a href="/">
-                <button class="text-white transition-colors bg-black rounded-3xl hover:bg-gray-500">
-                    <h4 class="w-full px-8 py-4">Find a Vehicle</h4>
-                </button>
-            </a>
-        </div>
+
     </div>
     </section>
     <section class="py-32 text-black bg-gray-100">
