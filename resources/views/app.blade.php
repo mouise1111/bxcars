@@ -24,7 +24,7 @@
     <div class="relative h-screen bg-black"
         style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div x-data="{ open: false }">
-            <nav class="flex justify-between items-center py-8 px-4">
+            <nav class="flex items-center justify-between px-4 py-8">
                 <button @click="open = !open" class="space-y-2 focus:outline-none">
                     <!-- Icône du menu (hamburger) -->
                     <div class="w-8 h-0.5 bg-white"></div>
@@ -32,20 +32,20 @@
                     <div class="w-8 h-0.5 bg-white"></div>
                 </button>
                 <!-- Logo -->
-                <a href="/" class="text-3xl uppercase logo text-white">bxcars</a>
+                <a href="/" class="text-3xl text-white uppercase logo">bxcars</a>
                 <div>
                     @if(Route::has('login'))
                     @auth
-                    <span class="text-white pr-4 hover:text-yellow-500"
+                    <span class="pr-4 text-white hover:text-yellow-500"
                         onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                        <img class="inline cursor-pointer h-7" src="{{ asset('logout.png') }}" alt="Déconnexion">
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                     @else
-                    <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
+                    <a href="{{ route('login') }}" class="pr-4 text-white hover:text-yellow-500">Connexion</a>
                     @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="text-white hover:text-yellow-500">Inscription</a>
                     @endif
@@ -55,21 +55,21 @@
             </nav>
 
 
-            <div class="absolute top-0 left-0 w-60 h-screen bg-black transform transition-transform duration-200"
+            <div class="absolute top-0 left-0 w-40 h-screen transition-transform duration-200 transform bg-black"
                 :class="{'-translate-x-full': !open, 'translate-x-0': open}">
-                <button @click="open = false" class="text-white p-4">
-                    Fermer
+                <button @click="open = false" class="p-4 text-white hover:text-red-400">
+                    <img src="/close-menu-icon.png" alt="closing the menu button icon" class="w-1/2 rounded-full h-1/2 ">
                 </button>
-                <div class="flex flex-col p-4">
-                    <a href="#" class="py-2 text-white hover:text-yellow-500">Accueil</a>
-                    <a href="{{ url('/services') }}" class="py-2 text-white hover:text-yellow-500">Services</a>
-                    <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À propos</a>
-                    <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                <div class="flex flex-col px-4 py-2 border-2 border-gray-500 rounded-lg">
+                    <a href="#" class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">Accueil</a>
+                    <a href="{{ url('/services') }}" class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">Services</a>
+                    <a href="{{ url('/about') }}" class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">À propos</a>
+                    <a href="{{ url('/contact') }}" class="py-2 mb-4 text-white border-b-2 border-gray-100 hover:text-yellow-500">Contact</a>
                 </div>
             </div>
 
         </div>
-        <h1 class="text-5xl mt-20 font-bold text-white text-center lg:px-32">
+        <h1 class="mt-20 text-5xl font-bold text-center text-white lg:px-32">
             Votre clé pour explorer le Maroc, confort et liberté garantis
         </h1>
     </div>
@@ -89,14 +89,14 @@
         @auth
         <div class="flex justify-center mt-6">
             <a href="{{ url('/cars/create') }}"
-                class="bg-yellow-500 text-2xl text-white px-6 py-3 rounded transition duration-500 hover:bg-black">Gestion
+                class="px-6 py-3 text-2xl text-white transition duration-500 bg-yellow-500 rounded hover:bg-black">Gestion
                 de véhicules</a>
         </div>
         @endauth
         @endif
 
 
-        <div class="grid grid-cols-3 grid-rows-2 gap-4 lg:px-20 mt-20">
+        <div class="grid grid-cols-3 grid-rows-2 gap-4 mt-20 lg:px-20">
             @foreach ($cars as $car)
             <div class="flex flex-col p-2 transition-all bg-white border-2 hover:border-black border-gray rounded-3xl">
                 <img src="{{ Storage::url($car->photo) }}" alt="Car Image">
