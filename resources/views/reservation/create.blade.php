@@ -50,6 +50,7 @@
             </div>
             @endif
 
+
             @if(session('success'))
             <div class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4">
                 {{ session('success') }}
@@ -88,9 +89,18 @@
             </div>
             @else
 
+            @if(isset($unavailableDates) && $unavailableDates->isNotEmpty())
+            <div class="text-center">
+                <p class="bg-red-500">Véhicule indisponible :</p>
+                @foreach($unavailableDates as $date)
+                <li class="bg-red-500">Du {{ \Carbon\Carbon::parse($date->start_date)->format('d/m/Y') }} au {{
+                    \Carbon\Carbon::parse($date->end_date)->format('d/m/Y') }}</li>
+                @endforeach
+            </div>
+            @endif
 
             <!-- Reservation Form -->
-            <div class="z-10 flex justify-center items-start mb-0 duration-500">
+            <div class="z-10 flex justify-center items-start mb-0 duration-500 mt-5">
                 <div
                     class="flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl hover:bg-yellow-400 transition-colors duration-300">
                     <form action="{{ route('reservations.store') }}" method="POST" class="reservation-form">

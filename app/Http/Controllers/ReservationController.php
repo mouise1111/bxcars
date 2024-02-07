@@ -52,7 +52,7 @@ class ReservationController extends Controller
         $reservation = Reservation::create($validated);
 
         if ($reservation) {
-            return back()->with('success', "Votre réservation a été effectuée avec succès ! Le coût total est de $totalCost €.");
+            return back()->with('success', "Votre réservation a été effectuée avec succès ! Le coût total est de $totalCost DH.");
         } else {
             return back()->with('error', 'Une erreur est survenue lors de la création de votre réservation.');
         }
@@ -143,7 +143,13 @@ class ReservationController extends Controller
             return redirect()->route('home')->with('error', 'Voiture non trouvée.');
         }
         $model_name = $car->model_name;
-        return view('reservation.create', compact('carId', 'car'));
+        $unavailableDates = Reservation::where('car_id', $carId)
+            ->where('status', 'accepted')
+            ->get(['start_date', 'end_date']);
+
+        return view('reservation.create', compact('carId', 'car', 'unavailableDates'));
+
+
     }
 
     public function destroy($id)
@@ -164,4 +170,22 @@ class ReservationController extends Controller
         return back()->with('success', 'La réservation a été annulée avec succès.');
     }
 
+    public function getUnavailableDatesForCar($carId)
+    {
+        // Récupérer uniquement les réservations acceptées pour le véhicule spécifié
+        $reservations = Reservation::where('car_id', $carId)
+            ->where('status', 'accepted') // Filtrer par statut accepté
+            ->get(['start_date', 'end_date']);
+
+        $unavailableDates = [];
+        foreach ($reservations as $reservation) {
+            // Ajouter chaque période de réservation acceptée aux dates indisponibles
+            $unavailableDates[] = [
+                'start' => $reservation->start_date,
+                'end' => $reservation->end_date,
+            ];
+        }
+
+        return $unavailableDates;
+    }
 }

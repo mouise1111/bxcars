@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <label class="block" for="price_per_day_short_term">Prix par jour (Moins ou égal à 3
+                        <label class="block" for="price_per_day_short_term">Prix DH par jour (Moins ou égal à 3
                             jours)</label>
                         <input type="number" step="0.01" name="price_per_day_short_term"
                             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
@@ -100,7 +100,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <label class="block" for="price_per_day_long_term">Prix par jour (Plus de 3 jours)</label>
+                        <label class="block" for="price_per_day_long_term">Prix DH par jour (Plus de 3 jours)</label>
                         <input type="number" step="0.01" name="price_per_day_long_term"
                             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                             required>
@@ -178,8 +178,8 @@
             <thead class="bg-gray-800 text-white">
                 <tr>
                     <th class="px-6 py-2 text-center">Modèle</th>
-                    <th class="px-6 py-2 text-center">Prix/jour (3J)</th>
-                    <th class="px-6 py-2 text-center">Prix/jour (+3J)</th>
+                    <th class="px-6 py-2 text-center">Prix DH/jour (3J)</th>
+                    <th class="px-6 py-2 text-center">Prix DH/jour (+3J)</th>
                     <th class="px-6 py-2 text-center">Caution</th>
                     <th class="px-6 py-2 text-center">Total KM</th>
                     <th class="px-6 py-2 text-center">Transmission</th>
@@ -248,11 +248,11 @@
                     <label for="modelName">Nom du Modèle:</label>
                     <input type="text" id="modelName" name="model_name" class="mt-2 border p-2 w-full" required>
 
-                    <label for="pricePerDay">Prix par Jour (-=3J):</label>
+                    <label for="pricePerDay">Prix DH par Jour (-=3J):</label>
                     <input type="number" id="pricePerDayShortTerm" name="price_per_day_short_term"
                         class="mt-2 border p-2 w-full" step="0.01" required>
 
-                    <label for="pricePerDay">Prix par Jour (+3J):</label>
+                    <label for="pricePerDay">Prix DH par Jour (+3J):</label>
                     <input type="number" id="pricePerDayLongTerm" name="price_per_day_long_term"
                         class="mt-2 border p-2 w-full" step="0.01" required>
 
