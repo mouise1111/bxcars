@@ -150,16 +150,19 @@
                             <span>{{ $car->fuel_type }}</span>
                         </div>
                     </div>
-                    @if(!$car->disponible)
-                    <p
-                        class="block w-full px-4 py-2 text-center text-white bg-red-600 border-2 border-red-600 rounded-3xl">
-                        Indisponible</p>
+
+                    @if(!$car->isAvailableToday())
+                    <a href="{{ route('reservation.create', ['car' => $car->id]) }}"
+                        class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-green-500 hover:text-white">
+                        Louer <span class="text-red-600">(Indisponible aujourd'hui)</span>
+                    </a>
                     @else
                     <a href="{{ route('reservation.create', ['car' => $car->id]) }}"
                         class="block w-full px-4 py-2 font-medium text-center text-black transition-colors border-2 border-black rounded-3xl hover:bg-green-500 hover:text-white">
                         Louer
                     </a>
                     @endif
+
                 </div>
             </div>
             @endforeach

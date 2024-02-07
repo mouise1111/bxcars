@@ -102,6 +102,18 @@ class ReservationController extends Controller
 
     }
 
+    public function isAvailableToday()
+    {
+        $today = now()->format('Y-m-d');
+        return $this->reservations()
+            ->where('status', 'accepted')
+            ->where(function ($query) use ($today) {
+                $query->where('start_date', '<=', $today)
+                    ->where('end_date', '>=', $today);
+            })->count() == 0;
+    }
+
+
     public function reject($id)
     {
         $reservation = Reservation::findOrFail($id);
