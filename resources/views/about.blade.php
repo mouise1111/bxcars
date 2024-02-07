@@ -53,9 +53,6 @@
                     </form>
                     @else
                     <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="text-white hover:text-yellow-500">Inscription</a>
-                    @endif
                     @endauth
                     @endif
                 </div>
@@ -142,7 +139,7 @@
                             <p><strong>Email :</strong> info@bxcars.be</p>
                             <p><strong>Téléphone :</strong> +32 491 76 89 74</p>
                         </div>
-                        <a href="#contact"
+                        <a href="{{ url('/contact') }}"
                             class="mt-5 inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
                             Contactez-nous
                         </a>
@@ -203,8 +200,8 @@
                     Passionné par l'automobile et le service client? BX Cars est toujours à la recherche de talents.
                     Contactez-nous pour faire partie de notre aventure!
                 </p>
-                <a href="#contact"
-                    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                <a href="{{ url('/contact') }}"
+                    class="mt-5 inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
                     Contactez-nous
                 </a>
             </div>
@@ -225,7 +222,7 @@
             <h1 class="text-3xl uppercase logo">Bxcars</h1>
         </div>
         <div class="flex justify-between gap-4 ">
-            <a href="/about" class="text-gray-300 transition-colors hover:text-white">About</a>
+            <a href="/about" class="text-gray-300 transition-colors hover:text-white">À propos</a>
             <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
         </div>
 

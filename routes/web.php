@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -23,13 +24,11 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about');
 });
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::redirect('/reservation', '/dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/create', [CarController::class, 'create']);
@@ -49,6 +48,8 @@ Route::post('/reservations', [ReservationController::class, 'store'])->name('res
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'accept'])->name('admin.reservations.accept');
 Route::post('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name('reservations.reject');
 
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+
 Route::get('/dashboard', [ReservationController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name('reservation.create');
 Route::patch('/admin/cars/{car}/toggle_availability', [CarController::class, 'toggleAvailability'])->name('admin.cars.toggle_availability');
@@ -62,13 +63,11 @@ Route::get('/membres', [MembreController::class, 'index'])->name('membres.index'
 Route::put('/membres/{membre}', [MembreController::class, 'update'])->name('membres.update');
 Route::get('/membres/{membre}/edit', [MembreController::class, 'edit'])->name('membres.edit');
 Route::delete('/membres/{membre}', [MembreController::class, 'destroy'])->name('membres.destroy');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
-Route::post('/maintenance/activate', [MaintenanceController::class, 'activateMaintenance'])->name('maintenance.activate');
-Route::post('/maintenance/deactivate', [MaintenanceController::class, 'deactivateMaintenance'])->name('maintenance.deactivate');
-Route::get('/maintenance-control', function () {
-    return view('OnOffMaintenance');
-})->middleware('auth');
+Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 
-Route::get('send-email-pdf', [PDFController::class, 'index']);
+
+
 
 require __DIR__ . '/auth.php';

@@ -1,17 +1,72 @@
 <!DOCTYPE html>
-<html>
-<!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-    <title>Confirmation de Réservation</title>
+    <meta charset="UTF-8">
+    <title>Confirmation de votre réservation chez BX Cars</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #EDCD27;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="header">
-        <p>Bonjour, votre location a été approuvée et acceptée par un travailleur de l'agence BX Cars.</p>
-        <p>Retrouvez ci-joint votre document de preuve</p>
+    <div class="container">
+        <div class="header">
+            <h2>Confirmation de votre réservation</h2>
+        </div>
+        <div class="content">
+            <p>Bonjour {{ $reservation->first_name }},</p>
+            <p>Nous sommes ravis de vous informer que votre réservation chez BX Cars a été <strong>acceptée</strong>.
+                Votre aventure commence ici !</p>
+            <p>Veuillez trouver ci-joint le document de confirmation de votre réservation. Il contient tous les détails
+                nécessaires concernant votre location, y compris les informations sur le véhicule, les dates de
+                réservation, et les instructions pour la prise en charge.</p>
+            <p>Nous vous rappelons de vous présenter avec une pièce d'identité valide et votre permis de conduire au
+                moment de récupérer le véhicule.</p>
+            <p>Si vous avez des questions ou avez besoin de modifications sur votre réservation, n'hésitez pas à nous
+                contacter. Nous sommes là pour vous assurer un voyage agréable et sans tracas.</p>
+            <p>Merci de choisir BX Cars pour vos besoins de location de voiture. Nous avons hâte de vous servir !</p>
+        </div>
+        <div class="footer">
+            Cordialement,<br>
+            L'équipe BX Cars<br>
+            <a href="mailto:info@bxcars.be">info@bxcars.be</a> | <a href="tel:+32 491 76 89 74">+32 491 76 89 74</a>
+        </div>
+    </div>
 </body>
 
 </html>

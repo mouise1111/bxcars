@@ -46,9 +46,6 @@
                     </form>
                     @else
                     <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="text-white hover:text-yellow-500">Inscription</a>
-                    @endif
                     @endauth
                     @endif
                 </div>
@@ -265,7 +262,7 @@
             <h1 class="text-3xl uppercase logo">Bxcars</h1>
         </div>
         <div class="flex justify-between gap-4 ">
-            <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">About</a>
+            <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
             <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
         </div>
 

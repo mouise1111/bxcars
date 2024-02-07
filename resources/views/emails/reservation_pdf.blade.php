@@ -78,8 +78,8 @@
         <div class="content">
             <table>
                 <tr>
-                    <th>Nom</th>
-                    <td>{{ $reservation->last_name }} {{ $reservation->first_name }}</td>
+                    <th>Nom complet</th>
+                    <td>{{ $reservation->first_name }} {{ $reservation->last_name }}</td>
                 </tr>
                 <tr>
                     <th>Véhicule</th>

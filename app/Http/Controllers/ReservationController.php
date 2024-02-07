@@ -98,9 +98,22 @@ class ReservationController extends Controller
                 ->subject('Confirmation de Réservation')
                 ->attachData($pdf->output(), "confirmation_reservation.pdf");
         });
+        return redirect()->route('dashboard')->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
 
-        return back()->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
     }
+
+    public function reject($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        // Supprimer la réservation
+        $reservation->delete();
+
+        // Rediriger vers le dashboard (ou une autre page de votre choix) avec un message de succès
+        return redirect()->route('dashboard')->with('success', 'Réservation supprimée avec succès.');
+    }
+
+
 
 
     public function dashboard()
@@ -121,5 +134,22 @@ class ReservationController extends Controller
         return view('reservation.create', compact('carId', 'car'));
     }
 
+    public function destroy($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $email = $reservation->email; // Assurez-vous que l'email est disponible dans votre modèle de réservation
+        $firstName = $reservation->first_name; // Pour personnaliser l'email d'annulation
+
+        // Envoyer l'email d'annulation ici
+        Mail::send('emails.reservation_canceled', ['firstName' => $firstName, 'reservation' => $reservation], function ($message) use ($email) {
+            $message->to($email)->subject('Annulation de votre réservation');
+        });
+
+
+        // Supprimer la réservation
+        $reservation->delete();
+
+        return back()->with('success', 'La réservation a été annulée avec succès.');
+    }
 
 }

@@ -25,7 +25,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="bg-black">
     <header>
         <nav class="p-2 bg-black shadow md:flex md:items-center md:justify-between fixed w-full top-0 z-50"
             style="background-color: black;">
@@ -72,211 +72,216 @@
         </nav>
     </header>
 
-    <main>
+    <main class="relative min-h-screen bg-black"
+        style="background-image: url('{{ asset('wallpapertanger.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         {{-- resources/views/admin/reservations.blade.php --}}
 
-        <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 class="text-2xl font-semibold text-gray-900">Réservations en attente</h1>
-            <div class="mt-8">
-                <div class="flex flex-col">
-                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Nom
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Véhicule
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Numéro de téléphone
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Email
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Lieu de prise
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date de début
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date de fin
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Total DH
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Actions
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($reservations->where('status', 'pending') as $reservation)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->first_name }} {{ $reservation->last_name }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->car->model_name ?? 'N/A' }}<br>{{
-                                                $reservation->car->total_km ?? 'N/A' }} KM
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->phone }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->email }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ ucfirst($reservation->pickup_location) }}
-                                            </td>
+        <div class="mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <h1 class="text-3xl font-semibold text-white mb-4">Réservations en attente</h1>
+            <p class="text-white mb-6">Les acceptations de demandes en attente envoient un message automatique et
+                génèrent un document PDF pour le client. Elles bloquent également les dates sélectionnées.</p>
+            <div class="shadow-md overflow-hidden border border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Nom
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Véhicule
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Numéro de téléphone
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Lieu de prise
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de début
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de fin
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Total DH
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class=" divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'pending') as $reservation)
+                        <tr>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->first_name }} {{ $reservation->last_name }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->car->model_name ?? 'N/A' }}<br>{{
+                                $reservation->car->total_km ?? 'N/A' }} KM
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->phone }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->email }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ ucfirst($reservation->pickup_location) }}
+                            </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
-                                                F Y') }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j
-                                                F Y') }}
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
+                                F Y') }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j
+                                F Y') }}
 
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <form method="POST"
-                                                    action="{{ route('admin.reservations.accept', $reservation->id) }}"
-                                                    class="inline">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit"
-                                                        class="text-white w-32 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                        Accepter</button>
-                                                </form>
-                                                <form action="{{ route('reservations.reject', $reservation->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('POST')
-                                                    <button type="submit"
-                                                        onclick="return confirm('Êtes-vous sûr de vouloir rejeter la réservation de {{ $reservation->first_name }} {{ $reservation->last_name }} pour la {{ $reservation->car->model_name ?? 'N/A' }} ?');"
-                                                        class="text-white w-32 bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-500 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                                        Rejeter
-                                                    </button>
-                                                    @if(session('success'))
-                                                    <div
-                                                        class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50 success-message">
-                                                        {{ session('success') }}
-                                                    </div>
-                                                    @endif
-                                                </form>
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
+                            </td>
+                            <td class="pt-8 bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <form method="POST" action="{{ route('admin.reservations.accept', $reservation->id) }}"
+                                    class="inline">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit"
+                                        class=" text-white w-32 bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                        Accepter</button>
+                                </form>
+                                <form method="POST" action="{{ route('reservations.reject', $reservation->id) }}">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?');"
+                                        class="text-white w-32 bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-500 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        Rejeter
+                                    </button>
+                                </form>
 
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 
 
         <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 class="text-2xl font-semibold text-gray-900">Réservations confirmées</h1>
-            <div class="mt-8">
-                <div class="flex flex-col">
-                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Nom</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Véhicule</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Montant</th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date de début
-                                            </th>
-                                            <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Date de fin
-                                            </th>
+            <h1 class="text-3xl font-semibold text-white mb-4">Réservations confirmées</h1>
+            <p class="text-white mb-6">Les annulations envoient un message automatique au client, le notifiant de
+                l'annulation de sa
+                réservation.</p>
+            <div class="shadow-md overflow-hidden border border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider ">
+                                Nom</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Véhicule</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Numéro de téléphone
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Montant</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de début
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de fin
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class=" divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'accepted') as $reservation)
+                        <tr>
+                            <td class=" bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->first_name }} {{ $reservation->last_name }}
+                            </td>
+                            <td
+                                class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white flex flex-col items-center justify-center">
+                                <div>{{ $reservation->car->model_name ?? 'N/A' }}<br>{{ $reservation->car->total_km ??
+                                    'N/A' }} KM</div>
+                                <form action="{{ route('admin.cars.toggle_availability', $reservation->car->id) }}"
+                                    method="POST" class="w-full mt-4">
+                                    @csrf
+                                    @method('PATCH')
+                                    <div class="flex flex-col items-center justify-center">
+                                        <div class=" flex items-center mb-2">
+                                            <input type="radio" name="disponible" value="1" {{
+                                                $reservation->car->disponible ? 'checked' : '' }} id="disponible">
+                                            <label for="disponible" class="ml-2 text-green-500">Disponible</label>
+                                        </div>
+                                        <div class="flex items-center mb-2">
+                                            <input type="radio" name="disponible" value="0" {{
+                                                !$reservation->car->disponible ? 'checked' : '' }} id="indisponible">
+                                            <label for="indisponible" class="ml-2 text-red-500">Indisponible</label>
+                                        </div>
+                                        <button type="submit"
+                                            class="px-4 py-2 text-sm text-white bg-yellow-500 rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-300">Mettre
+                                            à jour</button>
+                                    </div>
+                                </form>
+                            </td>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        @foreach($reservations->where('status', 'accepted') as $reservation)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->first_name }} {{ $reservation->last_name }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $reservation->car->model_name ?? 'N/A' }}<br>{{
-                                                $reservation->car->total_km ?? 'N/A' }} KM
-                                                <form
-                                                    action="{{ route('admin.cars.toggle_availability', $reservation->car->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <div class="mt-4">
-                                                        <label class="inline-flex items-center">
-                                                            <input type="radio" name="disponible" value="1" {{
-                                                                $reservation->car->disponible ? 'checked' : '' }}>
-                                                            <span class="ml-2">Disponible</span>
-                                                        </label>
-                                                        <label class="inline-flex items-center">
-                                                            <input type="radio" name="disponible" value="0" {{
-                                                                !$reservation->car->disponible ? 'checked' : '' }}>
-                                                            <span class="ml-2">Indisponible</span>
-                                                        </label>
-                                                    </div>
-                                                    <button type="submit"
-                                                        class="mt-2 px-4 py-2 text-sm text-white bg-blue-500 rounded">Mettre
-                                                        à jour</button>
-                                                </form>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->phone }}
+                            </td>
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
+                                F Y') }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j F
+                                Y') }}
+                            </td>
 
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
-                                                F Y') }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j F
-                                                Y') }}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-4 py-2 text-sm text-white bg-red-500 rounded"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation ?');">
+                                        Annuler
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
+
         <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>
