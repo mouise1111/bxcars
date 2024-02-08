@@ -36,7 +36,14 @@
                 <div>
                     @if(Route::has('login'))
                     @auth
-                    <span class="pr-4 text-white hover:text-yellow-500"
+                    <a class="text-white pr-2 hover:text-yellow-500" href="{{ url('/dashboard') }}"
+                        style="cursor: pointer;">
+                        ADMIN
+                    </a>
+                    <span class="text-white pr-2">
+                        |
+                    </span>
+                    <span class="pr-4 text-white hover:text-yellow-500" style="cursor: pointer;"
                         onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <img class="inline cursor-pointer h-7" src="{{ asset('logout.png') }}" alt="Déconnexion">

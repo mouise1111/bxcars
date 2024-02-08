@@ -109,19 +109,22 @@
 
                         <div>
                             <label for="nom" class="block text-sm font-medium text-white">Nom:</label>
-                            <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                            <input type="text"
+                                class="text-gray-800 form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                                 id="nom" name="nom" required>
                         </div>
 
                         <div>
                             <label for="fonction" class="block text-sm font-medium text-white">Fonction:</label>
-                            <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                            <input type="text"
+                                class="text-gray-800 form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                                 id="fonction" name="fonction" required>
                         </div>
 
                         <div>
                             <label for="language" class="block text-sm font-medium text-white">Langues:</label>
-                            <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                            <input type="text"
+                                class="text-gray-800 form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm"
                                 id="language" name="language" placeholder="Exemple : Français, Anglais" required>
                         </div>
 
@@ -131,7 +134,7 @@
                         </button>
                     </form>
                 </div>
-                <div class="max-w-4xl mx-4 p-6 rounded-lg shadow overflow-hidden border-white border-2 rounded-lg">
+                <div class="max-w-4xl mx-auto p-6 rounded-lg shadow overflow-hidden border-white border-2">
                     <h3 class="text-2xl font-semibold mb-4">Membres existants</h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full leading-normal border-white border-2 rounded-lg">
@@ -139,44 +142,35 @@
                                 <tr>
                                     <th
                                         class="px-5 py-3 border-b-2 border-gray-200 text-yellow-500 bg-gray-800 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Nom
-                                    </th>
+                                        Nom</th>
                                     <th
                                         class="px-5 py-3 border-b-2 border-gray-200 text-yellow-500 bg-gray-800 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Fonction
-                                    </th>
+                                        Fonction</th>
                                     <th
                                         class="px-5 py-3 border-b-2 border-gray-200 text-yellow-500 bg-gray-800 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Langues
-                                    </th>
+                                        Langues</th>
                                     <th
                                         class="px-5 py-3 border-b-2 border-gray-200 text-yellow-500 bg-gray-800 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                        Actions
-                                    </th>
+                                        Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($membres as $membre)
+                                @forelse ($membres as $membre)
                                 <tr>
                                     <td class="px-5 py-5 border-b border-gray-200 text-sm text-white bg-gray-800">
                                         <div class="flex items-center">
                                             <div class="ml-3">
-                                                <p class=" whitespace-no-wrap ">
-                                                    {{ $membre->nom }}
-                                                </p>
+                                                <p class="whitespace-no-wrap">{{ $membre->nom }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 text-sm bg-gray-800">
-                                        <p class="text-gray-900 whitespace-no-wrap text-white bg-gray-800">{{
-                                            $membre->fonction }}
-                                        </p>
+                                        <p class="text-white whitespace-no-wrap">{{ $membre->fonction }}</p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 text-sm bg-gray-800">
-                                        <p class="text-gray-900 whitespace-no-wrap text-white">{{ $membre->language }}
-                                        </p>
+                                        <p class="text-white whitespace-no-wrap">{{ $membre->language }}</p>
                                     </td>
-                                    <td class="px-5 py-5 border-b border-gray-200  text-sm bg-gray-800">
+                                    <td class="px-5 py-5 border-b border-gray-200 text-sm bg-gray-800">
                                         <div class="flex items-center gap-2">
                                             <a href="{{ route('membres.edit', $membre->id) }}"
                                                 class="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out h-10 align-middle">Modifier</a>
@@ -186,19 +180,25 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="mt-3 inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out h-10 align-middle">
-                                                    Supprimer
-                                                </button>
+                                                    class="mt-3 inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out h-10 align-middle">Supprimer</button>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <!-- Laisser vide car le message est affiché en dehors de la table -->
+                                @endforelse
                             </tbody>
-
                         </table>
+                        @if($membres->isEmpty())
+                        <div class="text-center py-8">
+                            <p class="text-lg text-yellow-500">Il n'y a actuellement aucune personne ajoutée dans
+                                l'équipe BX Cars.</p>
+                        </div>
+                        @endif
                     </div>
                 </div>
+
             </div>
         </div>
 

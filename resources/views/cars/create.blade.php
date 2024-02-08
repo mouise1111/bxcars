@@ -58,6 +58,8 @@
             <div class="sm:fixed sm:top-0 sm:right-0 p-4 text-right z-10">
                 @if (Route::has('login'))
                 @auth
+                <span class="text-white pr-4 hover:text-yellow-500">
+                    ADMIN | </span>
                 <span class="text-white pr-4 hover:text-yellow-500"
                     onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -72,12 +74,14 @@
     </nav>
 </header>
 
-<main>
+<main class="relative min-h-screen bg-black"
+    style="background-image: url('{{ asset('wallpapertanger5.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
-    <div class="flex items-center justify-center mt-20">
-        <button class="mt-2 bg-yellow-500 text-2xl text-white px-10 py-3 rounded transition duration-500 hover:bg-black"
-            id="openAddModal">Ajouter un véhicule</button>
+    <div class="flex items-center justify-center">
+        <h1 class="text-8xl font-semibold text-center text-white mt-40">MyCARS</h1>
+        <h2 class="text-4xl font-semibold text-center text-yellow-500 mt-40 mb-20">Gestion de véhicules</h1>
     </div>
+
     <div id="myModal" class="modal">
         <div class="flex items-center justify-center min-h-screen">
             <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
@@ -124,8 +128,8 @@
                         <label class="block" for="transmission">Transmission</label>
                         <select name="transmission"
                             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
-                            <option value="Manual">Manual</option>
-                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manuelle</option>
+                            <option value="Automatic">Automatique</option>
                         </select>
                     </div>
 
@@ -141,8 +145,8 @@
                         <select name="fuel_type"
                             class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600">
                             <option value="Diesel">Diesel</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Electric">Electric</option>
+                            <option value="Petrol">Essence</option>
+                            <option value="Electric">Electrique</option>
                         </select>
                     </div>
 
@@ -173,6 +177,14 @@
     </div>
 
     <div class="cars-container mt-4 px-80">
+        <div class="flex items-center mb-4">
+            <h1 class="text-2xl font-semibold text-white mr-5">Véhicules disponibles</h1>
+            <button class="bg-yellow-500 text-1xl text-white px-5 py-2 rounded transition duration-500 hover:bg-black"
+                id="openAddModal">Ajouter un véhicule</button>
+        </div>
+        <p class="text-white mb-5">Attention : Assurez-vous de ne pas supprimer de véhicule actuellement loué par un
+            client.
+        </p>
         @if(isset($cars))
         <table class="min-w-full table-auto border-collapse">
             <thead class="bg-gray-800 text-white">
@@ -192,10 +204,12 @@
             </thead>
             <tbody>
                 @foreach($cars as $car)
-                <tr class="bg-white border-b">
+                <tr class="bg-yellow-500 border-b">
                     <td class="px-6 py-2 text-center">{{ $car->model_name }}</td>
-                    <td class="px-6 py-2 text-center">{{ $car->price_per_day_short_term }} DH</td>
-                    <td class="px-6 py-2 text-center">{{ $car->price_per_day_long_term }} DH</td>
+                    <td class="px-6 py-2 text-center">{{ number_format($car->price_per_day_short_term, 0, '.', '') }} DH
+                    </td>
+                    <td class="px-6 py-2 text-center">{{ number_format($car->price_per_day_long_term, 0, '.', '') }} DH
+                    </td>
                     <td class="px-6 py-2 text-center">{{ $car->price_caution }} DH</td>
                     <td class="px-6 py-2 text-center">{{ $car->total_km }} KM</td>
                     <td class="px-6 py-2 text-center">{{ $car->transmission }}</td>
@@ -306,7 +320,7 @@
 
 
     <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h1 class="text-2xl font-semibold text-gray-900">Gestion de la disponibilité du véhicule</h1>
+        <h1 class="text-2xl font-semibold text-white">Gestion de la disponibilité du véhicule</h1>
         <div class="mt-8">
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
