@@ -18,6 +18,7 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('css/createreservation.css') }}">
     @vite('resources/css/app.css')
 </head>
@@ -26,14 +27,50 @@
     <header class="flex flex-col min-h-screen">
         <section class="relative h-screen text-white bg-black mb-60"
             style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <nav class="flex flex-row justify-between py-8 lg:px-20">
-                <div class="space-y-2">
-                    <div class="w-8 h-0.5 bg-white"></div>
-                    <div class="w-8 h-0.5 bg-white"></div>
-                    <div class="w-8 h-0.5 bg-white"></div>
+            <div x-data="{ open: false }">
+                <nav class="flex justify-between items-center py-8 px-4">
+                    <button @click="open = !open" class="space-y-2 focus:outline-none">
+                        <div class="w-8 h-0.5 bg-white"></div>
+                        <div class="w-8 h-0.5 bg-white"></div>
+                        <div class="w-8 h-0.5 bg-white"></div>
+                    </button>
+                    <!-- Logo -->
+                    <a href="/" class="text-3xl uppercase logo text-white mr-10">bxcars</a>
+                    <div>
+                        @if(Route::has('login'))
+                        @auth
+                        <span class="text-white pr-4 hover:text-yellow-500"
+                            onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <img class="h-7 inline cursor-pointer" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        @endauth
+                        @endif
+                    </div>
+                </nav>
+
+                <!-- Menu déroulant -->
+                <div class="absolute top-0 left-0 w-60 h-screen bg-black transform transition-transform duration-200"
+                    :class="{'-translate-x-full': !open, 'translate-x-0': open}">
+                    <button @click="open = false" class="p-4 text-white hover:text-red-400">
+                        <img src="/close-menu-icon.png" alt="closing the menu button icon"
+                            class="w-1/2 rounded-full h-1/2 ">
+                    </button>
+                    <div class="flex flex-col p-4">
+                        <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>
+                        <a href="#" class="py-2 text-yellow-500 border-b-2 border-gray-100 ml-5">Réservation<br>
+                            {{
+                            $car->model_name }}</a>
+                        <a href="{{ url('/services') }}" class="py-2 text-white hover:text-yellow-500">Services</a>
+                        <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À
+                            propos</a>
+                        <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                    </div>
                 </div>
-                <a href="/" class="text-3xl text-white uppercase logo ml-20">bxcars</a>
-            </nav>
+            </div>
 
             @if(isset($car->model_name))
             <div class="text-center pt-10">
@@ -90,13 +127,22 @@
             @else
 
             @if(isset($unavailableDates) && $unavailableDates->isNotEmpty())
+            @php
+            $now = \Carbon\Carbon::now();
+            $futureUnavailableDates = $unavailableDates->filter(function ($date) use ($now) {
+            return \Carbon\Carbon::parse($date->end_date)->isSameOrAfter($now);
+            });
+            @endphp
+
+            @if($futureUnavailableDates->isNotEmpty())
             <div class="text-center">
                 <p class="bg-red-500">Véhicule indisponible :</p>
-                @foreach($unavailableDates as $date)
+                @foreach($futureUnavailableDates as $date)
                 <li class="bg-red-500">Du {{ \Carbon\Carbon::parse($date->start_date)->format('d/m/Y') }} au {{
                     \Carbon\Carbon::parse($date->end_date)->format('d/m/Y') }}</li>
                 @endforeach
             </div>
+            @endif
             @endif
 
             <!-- Reservation Form -->
@@ -208,8 +254,7 @@
             <img src="" alt="">
         </div>
     </footer>
-    <script>
-        "@fontsource/lexend-tera";
+    <script>   tsource / lexend - tera";
     </script>
 </body>
 

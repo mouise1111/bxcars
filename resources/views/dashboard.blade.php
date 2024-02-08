@@ -178,6 +178,27 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if($reservations->where('status', 'pending')->isEmpty())
+                <div class="text-center py-8">
+                    <p class="text-lg text-yellow-500">Il n'y a pour l'instant aucune réservation en attente.</p>
+                </div>
+                @else
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <!-- Table headers -->
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'pending') as $reservation)
+                        <tr>
+                            <!-- Reservation data -->
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
+
             </div>
         </div>
 
@@ -280,6 +301,26 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if($reservations->where('status', 'accepted')->isEmpty())
+                <div class="text-center py-8">
+                    <p class="text-lg text-yellow-500">Il n'y a pour l'instant aucune réservation confirmée.</p>
+                </div>
+                @else
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <!-- Table headers -->
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'accepted') as $reservation)
+                        <tr>
+                            <!-- Reservation data -->
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
             </div>
         </div>
 
