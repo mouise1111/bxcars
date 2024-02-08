@@ -7,6 +7,7 @@ use App\Http\Controllers\MembreController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -21,6 +22,10 @@ Route::get('/', function () {
     $totalCars = Car::count();
     return view('app', compact('cars', 'totalCars'));
 })->name('home');
+
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/about', function () {
     return view('about');

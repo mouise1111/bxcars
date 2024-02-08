@@ -61,6 +61,10 @@
                         <a href="{{ url('/cars/create') }}" class="text x1 hover:text-yellow-500 duration-500"
                             style="background-color: black;">MyCARS</a>
                     </li>
+                    <li class="mx-4 my-0 md:my-0 bg-black">
+                        <a href="{{ url('/user/create') }}" class="text x1 hover:text-yellow-500 duration-500"
+                            style="background-color: black;">MyADMIN</a>
+                    </li>
                 </ul>
                 <div class="sm:fixed sm:top-0 sm:right-0 p-4 text-right z-10">
                     @if (Route::has('login'))
@@ -202,10 +206,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('edit-membre', event => {
-                console.log('edit-membre event caught!', event.detail);
-            });
-        </script>
+
 
     </main>
