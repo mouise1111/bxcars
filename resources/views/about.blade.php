@@ -39,7 +39,7 @@
                     <div class="w-8 h-0.5 bg-white"></div>
                 </button>
                 <!-- Logo -->
-                <a href="/" class="text-3xl ml-20 uppercase logo text-white">bxcars</a>
+                <a href="/" class="text-3xl uppercase logo text-white">bxcars</a>
                 <div>
                     @if(Route::has('login'))
                     @auth
@@ -51,8 +51,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    @else
-                    <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
                     @endauth
                     @endif
                 </div>
@@ -61,11 +59,14 @@
             <!-- Menu déroulant -->
             <div class="absolute top-0 left-0 w-60 h-screen bg-black transform transition-transform duration-200"
                 :class="{'-translate-x-full': !open, 'translate-x-0': open}">
-                <button @click="open = false" class="text-white p-4">Fermer</button>
+                <button @click="open = false" class="p-4 text-white hover:text-red-400">
+                    <img src="/close-menu-icon.png" alt="closing the menu button icon"
+                        class="w-1/2 rounded-full h-1/2 ">
+                </button>
                 <div class="flex flex-col p-4">
                     <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>
                     <a href="{{ url('/services') }}" class="py-2 text-white hover:text-yellow-500">Services</a>
-                    <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À propos</a>
+                    <a href="{{ url('/about') }}" class="py-2 text-yellow-500 border-b-2 border-gray-100">À propos</a>
                     <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
                 </div>
             </div>

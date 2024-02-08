@@ -44,8 +44,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    @else
-                    <a href="{{ route('login') }}" class="text-white pr-4 hover:text-yellow-500">Connexion</a>
                     @endauth
                     @endif
                 </div>
@@ -59,7 +57,7 @@
                         class="w-1/2 rounded-full h-1/2 ">
                 </button>
                 <div class="flex flex-col px-4 py-2 border-2 border-gray-500 rounded-lg">
-                    <a href="#" class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">Accueil</a>
+                    <a href="#" class="py-2 text-yellow-500 border-b-2 border-gray-100">Accueil</a>
                     <a href="{{ url('/services') }}"
                         class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">Services</a>
                     <a href="{{ url('/about') }}"

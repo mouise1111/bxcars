@@ -6,6 +6,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -58,16 +59,14 @@ Route::get('/about', [MembreController::class, 'about'])->name('about');
 Route::get('/membres/create', [MembreController::class, 'create'])->name('membres.create');
 Route::post('/membres', [MembreController::class, 'store'])->name('membres.store');
 Route::get('/membres', [MembreController::class, 'index'])->name('membres.index');
-
-
 Route::put('/membres/{membre}', [MembreController::class, 'update'])->name('membres.update');
 Route::get('/membres/{membre}/edit', [MembreController::class, 'edit'])->name('membres.edit');
 Route::delete('/membres/{membre}', [MembreController::class, 'destroy'])->name('membres.destroy');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
 
-
+Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
 
 
 require __DIR__ . '/auth.php';
