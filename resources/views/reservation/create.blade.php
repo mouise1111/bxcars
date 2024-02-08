@@ -96,9 +96,15 @@
 
 
             @if(session('success'))
-            <div class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4">
+            <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
                 {{ session('success') }}
             </div>
+
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 4000);
+            </script>
             <!-- Form Succeeded -->
             <div class="z-10 flex justify-center items-start mb-0 duration-500">
                 <div

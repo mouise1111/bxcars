@@ -55,7 +55,7 @@ class CarController extends Controller
         $car->disponible = $request->input('disponible', false);
         $car->save();
 
-        return redirect()->route('cars.index')->with('success', 'Car added successfully.');
+        return redirect()->route('cars.index')->with('success', 'Le véhicule a bien été ajouté.');
     }
 
 

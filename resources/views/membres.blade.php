@@ -27,13 +27,9 @@
     @vite('resources/css/app.css')
 </head>
 
+
 <body class="bg-black">
-    @if(session('success'))
-    <div class="mt-20 top-0 left-0 right-0 bg-green-500 text-white text-center py-2" role="alert">
-        <p class="font-bold">Succès</p>
-        <p>{{ session('success') }}</p>
-    </div>
-    @endif
+
     <header>
         <nav class="p-2 bg-black shadow md:flex md:items-center md:justify-between fixed w-full top-0 z-50"
             style="background-color: black;">
@@ -86,6 +82,18 @@
     <main class="relative min-h-screen bg-black"
         style="background-image: url('{{ asset('wallpapertanger2.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="pt-60 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            @if(session('success'))
+            <div id="successMessage"
+                class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-center p-5 rounded-md z-50">
+                {{ session('success') }}
+            </div>
+
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            </script>
+            @endif
             <h1 class="text-7xl font-semibold text-white mb-4">L'équipe BX Cars</h1>
             <p class="text-white mb-6">Vous pouvez fréquemment changer le tableau. Il est automatiquement mis à jour sur
                 la page "A propos". </p>

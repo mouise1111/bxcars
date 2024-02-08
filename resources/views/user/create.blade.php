@@ -77,106 +77,125 @@
     </nav>
 </header>
 
+<body class="bg-gray-800">
+    <main class="relative min-h-screen bg-black"
+        style="background-image: url('{{ asset('wallpapertanger5.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
-<main class="relative min-h-screen bg-black"
-    style="background-image: url('{{ asset('wallpapertanger5.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-
-    <div class="flex items-center justify-center">
-        <h1 class="text-8xl font-semibold text-center text-white mt-40">MyADMIN</h1>
-        <h2 class="text-4xl font-semibold text-center text-yellow-500 mt-40 mb-20">Gestion d'utilisateurs</h1>
-    </div>
-
-
-
-    <div class="cars-container mt-4 px-80 ">
-        <div class="flex items-center mb-4">
-            <h1 class="text-2xl font-semibold text-white mr-5">Ajouter un administrateur</h1>
+        <div class="flex items-center justify-center">
+            <h1 class="text-8xl font-semibold text-center text-white mt-30">MyADMIN</h1>
+            <h2 class="text-4xl font-semibold text-center text-yellow-500 mt-40 mb-10">Gestion d'utilisateurs</h1>
         </div>
-        <p class="text-white mb-5 ">Attention : Veillez à ne pas laisser le tableau sans administrateur.
-            L'authentification d'email est désactivé.
-        </p>
-        <div class="mt-8 flex justify-between bg-gray-800">
-            <div class="w-1/2 pr-4">
-                <form method="POST" action="{{ route('user.store') }}" class="space-y-4 ml-5 mr-5">
-                    @csrf
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-white">Nom :</label>
-                        <input type="text" name="name" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-white">Email :</label>
-                        <input type="email" name="email" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    </div>
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-white">Mot de passe :</label>
-                        <input type="password" name="password" required
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    </div>
-                    <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-700">Créer
-                        l'administrateur</button>
-                </form>
-            </div>
 
-            <div class="w-1/2 pl-4 bg-yellow-500">
-                <h2 class="text-lg font-semibold mb-4 mt-4">Administrateurs actuels</h2>
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-800">
-                        <tr>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
-                                Nom
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
-                                Email
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach($users as $user)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->name }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $user->email }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <form action="{{ route('user.destroy', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="cars-container mt-4 px-80 ">
+
+
+        <div class="cars-container px-80 ">
             <div class="flex items-center mb-4">
-                <h1 class="text-2xl font-semibold text-white mr-5">Code QR : www.bxcars.be</h1>
+                <h1 class="text-2xl font-semibold text-white mr-5">Ajouter un administrateur</h1>
             </div>
             <p class="text-white mb-5 ">Attention : Veillez à ne pas laisser le tableau sans administrateur.
                 L'authentification d'email est désactivé.
             </p>
-            <div class="mt-8 flex justify-between">
-                <div class="w-1/4 pr-4">
+            <div class="mt-8 flex justify-between bg-gray-800 shadow border-white border-2 rounded-lg mb-20 mt-10">
+                <div class="w-1/2 pr-4">
+                    <form method="POST" action="{{ route('user.store') }}" class="space-y-4 ml-5 mr-5">
+                        @csrf
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-white">Nom :</label>
+                            <input type="text" name="name" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-white">Email :</label>
+                            <input type="email" name="email" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        </div>
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-white">Mot de passe :</label>
+                            <input type="password" name="password" required
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        </div>
+                        <button type="submit"
+                            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-700">Créer
+                            l'administrateur</button>
+                    </form>
+                    @if(session('success'))
+                    <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
+                        {{ session('success') }}
+                    </div>
+
+                    <script>
+                        setTimeout(function () {
+                            document.getElementById('successMessage').style.display = 'none';
+                        }, 2000);
+                    </script>
+                    @endif
                 </div>
 
-                {{-- Afficher le code QR --}}
-                <img src="{{ asset('frame.png') }}" alt="Code QR">
-
-                {{-- Lien pour télécharger le code QR --}}
-                <a href="{{ asset('frame.png') }}" download="MonCodeQR.jpg">Télécharger le Code
-                    QR</a>
+                <div class="w-1/2 bg-yellow-500 mx-auto">
+                    <h2 class="text-lg font-semibold mb-4 mt-4 text-center">Administrateurs actuels</h2>
+                    <div class="flex justify-center ml-20 mr-20 shadow border-white border-2 rounded-lg mb-10">
+                        <table class="min-w-full ">
+                            <thead class="bg-gray-800">
+                                <tr>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                        Nom
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                        Email
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach($users as $user)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $user->name }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        {{ $user->email }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="flex justify-center items-center bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 focus:outline-none focus:ring focus:ring-red-300"
+                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="cars-container px-80 rounded-lg shadow border-white border-2 rounded-lg mb-20 mt-10">
+
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-semibold text-white mr-5">Code QR</h1>
+                    <a href="{{ asset('frame.png') }}" download="BXCarsQR.jpg"
+                        class="bg-yellow-500 text-1xl text-white px-5 py-2 rounded transition duration-500 hover:bg-black mt-2">Enregistrer
+                        sous JPG</a>
+                </div>
+                <p class="text-white">Ce code QR qui redirige vers le site www.bxcars.be vous permettra de
+                    l'afficher
+                    dans des projets extérieurs.
+                </p>
+
+                <div class="mt-8 mb-4">
+                    <div class="w-1/4 pr-4">
+                    </div>
+
+                    {{-- Afficher le code QR --}}
+                    <img src="{{ asset('frame.png') }}" alt="Code QR" style="width: 200px;">
+                </div>
+            </div>
+    </main>
+</body>

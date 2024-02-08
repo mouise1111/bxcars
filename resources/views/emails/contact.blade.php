@@ -29,21 +29,20 @@
 </head>
 
 <body>
-    @if(session('success'))
-    <div id="success-message" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50">
-        {{ session('success') }}
-    </div>
-    <script>
-        setTimeout(function () {
-            document.getElementById('success-message').style.display = 'none';
-        }, 3000); 
-    </script>
-    @endif
-
-
     <header>
         <div class="relative min-h-screen bg-black"
             style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            @if(session('success'))
+            <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
+                {{ session('success') }}
+            </div>
+
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 4000);
+            </script>
+            @endif
             <div x-data="{ open: false }">
                 <nav class="flex justify-between items-center py-8 px-4">
                     <button @click="open = !open" class="space-y-2 focus:outline-none">
