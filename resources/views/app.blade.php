@@ -237,13 +237,11 @@
     </section>
 
     <section class="px-32 py-32 text-black bg-gray-100">
-        <h2 class="mb-16 text-4xl font-bold">What Our Customer Say</h2>
-        <p class="text-2xl font-semibold"><span>“</span>I was really impressed with the level of service I received
-            from this car
-            rental company. The process was
-            smooth and easy, and the car I rented was in excellent condition. The staff was friendly and helpful, and I
-            felt well taken care of throughout my rental period. I would definitely recommend this company to anyone
-            looking for a premium car rental experience.<span>“</span>
+        <h2 class="mb-16 text-4xl font-bold">Ce que disent nos clients</h2>
+        <p class="text-2xl font-semibold"><span>“</span>J'ai été vraiment impressionné par le niveau de service que j'ai
+            reçu de cette entreprise de location de voitures. Le processus était fluide et facile, et la voiture que
+            j'ai louée était en excellent état. Le personnel était sympathique et serviable, et je me suis senti bien
+            pris en charge tout au long de ma période de location.<span>“</span>
         </p>
         <div class="flex flex-row justify-between mt-8">
             <div class="flex flex-row gap-4">
@@ -251,8 +249,8 @@
                     {{-- <img src="" alt="profile picture of the car renter"> --}}
                 </div>
                 <div class="flex flex-col justify-between py-3">
-                    <h4 class="font-bold">Lokman Hossain</h4>
-                    <h6 class="text-gray-800">From <span class="font-semibold">Texas</span></h6>
+                    <h4 class="font-bold">Nawfel Ajari</h4>
+                    <h6 class="text-gray-800">De <span class="font-semibold">Bruxelles</span></h6>
                 </div>
             </div>
             <div class="flex flex-row gap-2 m-4 mt-4 ml-auto lg:mt-auto">

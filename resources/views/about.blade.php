@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>A propos - BX Cars</title>
+    <title>À propos - BX Cars</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,7 +26,19 @@
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
+
+<style>
+    /* Définissez la taille de votre carte */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
 
 <body>
     <div class="relative min-h-screen bg-black"
@@ -217,6 +229,7 @@
         </div>
     </section>
 
+    <div id="map" style=" height: 600px; }"></div>
 
 
 
@@ -248,7 +261,22 @@
         </div>
     </footer>
     <script>
-        "@fontsourexe";
+        // Initialisation de la carte avec un point de vue qui couvre les deux emplacements.
+        // Choisissez un zoom initial et un point central adaptés.
+        var map = L.map('map').setView([35.73912798560225, -5.8717320174806755], 13);
+
+        // Ajout des tuiles de carte
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Ajout du premier marqueur
+        L.marker([35.75087829113416, -5.831858625204238]).addTo(map)
+            .bindPopup('15 Rue Hay Beauséjour 1, Tanger (Maroc)<br>Agence | Garage BX Cars');
+
+        // Ajout du deuxième marqueur
+        L.marker([35.72737767907435, -5.911605409757113]).addTo(map)
+            .bindPopup("Parking de l'Aéroport Ibn Batouta");
     </script>
 </body>
 

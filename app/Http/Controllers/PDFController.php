@@ -14,7 +14,7 @@ class PDFController extends Controller
      */
     public function index()
     {
-        $data["email"] = "ajarinawfel1@gmail.com";
+        $data["email"] = "info@bxcars.be";
         $data["title"] = "Confirmation réservation - BX Cars";
         $data["body"] = "Merci pour votre réservation. Retrouvez ci-joint la confirmation officielle de votre réservation entre le ... et le ...";
 

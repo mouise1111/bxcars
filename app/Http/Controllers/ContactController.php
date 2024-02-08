@@ -18,7 +18,7 @@ class ContactController extends Controller
 
         $data = $request->all();
 
-        Mail::to('ajarinawfel1@gmail.com')->send(new ContactMail($data));
+        Mail::to('info@bxcars.be')->send(new ContactMail($data));
 
         return back()->with('success', 'Votre message a été envoyé avec succès!');
     }
