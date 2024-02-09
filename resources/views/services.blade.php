@@ -19,6 +19,14 @@
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
         integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        .custom-font {
+            font-family: 'Poppins';
+
+        }
+    </style>
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
@@ -165,28 +173,45 @@
 
 
 
-    <footer
-        class="mt-0 flex flex-col items-center justify-between py-4 text-white border-t-2 border-gray-200 lg:px-12 lg:flex-row">
-        <div>
-            <h1 class="text-3xl uppercase logo">Bxcars</h1>
-        </div>
-        <div class="flex justify-between gap-4 ">
-            <a href="/about" class="text-gray-300 transition-colors hover:text-white">À propos</a>
-            <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
-        </div>
-
-        <div class="flex flex-row gap-4">
-            <div
-                class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
-                <img src="/instagram.svg" alt="instagram icon">
+    <footer class="flex flex-col text-white bg-black border-t-2 border-gray-200">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 lg:px-12 w-full">
+            <div>
+                <h1 class="text-3xl uppercase logo">Bxcars</h1>
             </div>
-            <div
-                class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
-                <img src="{{ asset('facebook.svg') }}" alt="">
+            <div class="flex justify-between gap-4">
+                <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
+                <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
             </div>
-            <img src="" alt="">
+            <div class="flex flex-row gap-4">
+                <a href="https://www.instagram.com/bx_cars_rental/" target="_blank" rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="/instagram.svg" alt="instagram icon">
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/people/Bx-Cars/pfbid0K5HQSNgyJPMsKygqBWgqgy8Mtrr99SHEcJt2s2LckipK9GatJLFvcA8r6zeYxiFel/"
+                    target="_blank" rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="{{ asset('facebook.svg') }}" alt="facebook icon">
+                    </div>
+                </a>
+                <a href="https://www.snapchat.com/add/bxcars-tanger?share_id=HxAMeEKaQeY&locale=fr-BE" target="_blank"
+                    rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="{{ asset('snapchat.svg') }}" alt="snapchat icon">
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- Utilisation de w-full pour assurer que le background jaune s'étende sur toute la largeur -->
+        <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
+            <p>MADE IT WITH PASSION ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
+                    target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
     </footer>
+
 </body>
 
 </html>

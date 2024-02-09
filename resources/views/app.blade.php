@@ -14,8 +14,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+
+    <style>
+        .custom-font {
+            font-family: 'Poppins';
+
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha384-k6vP0kZfSfQLz2Whle6PvjeK9fuT+9HbR4uPm3IjB4z1EW2koqT92yWfJYF8Dg3j" crossorigin="anonymous">
+
     <script src="//unpkg.com/alpinejs" defer></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite('resources/css/app.css')
@@ -272,29 +282,50 @@
         </div>
     </section>
 
-    <footer
-        class="flex flex-col items-center justify-between py-4 text-white bg-black border-t-2 border-gray-200 lg:px-12 lg:flex-row">
-        <div>
-            <h1 class="text-3xl uppercase logo">Bxcars</h1>
+    <footer class="text-white bg-black border-t-2 border-gray-200">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 lg:px-12">
+            <div>
+                <h1 class="text-3xl uppercase logo">Bxcars</h1>
+            </div>
+            <div class="flex justify-between gap-4">
+                <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
+                <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
+            </div>
+            <div class="flex flex-row gap-4">
+                <a href="https://www.instagram.com/bx_cars_rental/" target="_blank" rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="/instagram.svg" alt="instagram icon">
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/people/Bx-Cars/pfbid0K5HQSNgyJPMsKygqBWgqgy8Mtrr99SHEcJt2s2LckipK9GatJLFvcA8r6zeYxiFel/"
+                    target="_blank" rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="{{ asset('facebook.svg') }}" alt="facebook icon">
+                    </div>
+                </a>
+
+                <!-- Snapchat -->
+                <a href="https://www.snapchat.com/add/bxcars-tanger?share_id=HxAMeEKaQeY&locale=fr-BE" target="_blank"
+                    rel="noopener noreferrer">
+                    <div
+                        class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
+                        <img src="{{ asset('snapchat.svg') }}" alt="snapchat icon">
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="flex justify-between gap-4 ">
-            <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
-            <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
+        <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
+            <p>MADE IT WITH PASSION ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
+                    target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
 
-        <div class="flex flex-row gap-4">
-            <div
-                class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
-                <img src="/instagram.svg" alt="instagram icon">
-            </div>
-            <div
-                class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
-
-                <img src="{{ asset('facebook.svg') }}" alt="">
-            </div>
-            <img src="" alt="">
-        </div>
     </footer>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var btnVoirPlus = document.getElementById('voirPlusBtn');
@@ -306,9 +337,6 @@
         }
     });
     </script>
-
-
-
 </body>
 
 </html>
