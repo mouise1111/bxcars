@@ -32,19 +32,17 @@
 </head>
 
 <body>
-    @if(session('success'))
-    <div id="success-message" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50">
-        {{ session('success') }}
-    </div>
-    <script>
-        setTimeout(function () {
-            document.getElementById('success-message').style.display = 'none';
-        }, 3000); 
-    </script>
-    @endif
-
-
     <header>
+        @if(session('success'))
+        <div id="success-message" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50">
+            {{ session('success') }}
+        </div>
+        <script>
+            setTimeout(function () {
+                document.getElementById('success-message').style.display = 'none';
+            }, 3000); 
+        </script>
+        @endif
         <div class="relative min-h-screen bg-black"
             style="background-image: url('{{ asset('wallpapertanger4.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div x-data="{ open: false }">
@@ -207,7 +205,7 @@
         </div>
         <!-- Utilisation de w-full pour assurer que le background jaune s'étende sur toute la largeur -->
         <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
-            <p>MADE IT WITH PASSION ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
+            <p>MADE IT WITH PASSION ♥ ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
                     target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
     </footer>

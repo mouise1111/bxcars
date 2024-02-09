@@ -237,7 +237,7 @@
             </div>
         </div>
         <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
-            <p>MADE IT WITH PASSION ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
+            <p>MADE IT WITH PASSION ♥ ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
                     target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
 

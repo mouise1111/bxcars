@@ -1,3 +1,11 @@
+.icons {
+    width: 20px;
+}
+
+.icons-2 {
+    width: 28px;
+}
+
 .logo {
     color: white;
     font-family: "Lexend Tera", sans-serif;
@@ -26,16 +34,9 @@
     text-align: justify;
 }
 
-footer {
-    background-color: #222;
-    color: white;
-    padding: 20px 0;
-}
-
-.icons {
-    width: 20px;
-}
-
-.icons-2 {
-    width: 28px;
+@font-face {
+    font-family: "Lexend Tera";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
 }

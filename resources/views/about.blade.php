@@ -256,7 +256,7 @@
     </main>
 
 
-    <footer class="text-white bg-black border-t-2 border-gray-200">
+    <footer class="text-white bg-black border-gray-200">
         <div class="flex flex-col lg:flex-row items-center justify-between py-4 lg:px-12">
             <div>
                 <h1 class="text-3xl uppercase logo">Bxcars</h1>
@@ -290,8 +290,8 @@
                 </a>
             </div>
         </div>
-        <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
-            <p>MADE IT WITH PASSION ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
+        <div class=" text-sm text-center bg-yellow-500 custom-font">
+            <p>MADE IT WITH PASSION ♥ ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
                     target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
 
