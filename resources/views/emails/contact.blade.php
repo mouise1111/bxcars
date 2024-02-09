@@ -1,8 +1,3 @@
-<div class="container">
-
-</div>
-{{-- resources/views/about.blade.php --}}
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -10,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Contact - BX Cars</title>
+    <title>Contact | BX Cars</title>
+    <link rel="icon" type="image/png" href="/bxlogo-modified.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

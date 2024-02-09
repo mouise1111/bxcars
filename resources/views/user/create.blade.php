@@ -1,8 +1,3 @@
-<!-- resources/views/cars/create.blade.php -->
-<div class="container">
-    @yield('content')
-</div>
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -10,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>MyADMIN - BX Cars</title>
-
+    <title>MyADMIN | BX Cars</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bxlogo-modified.png') }}">.
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -47,7 +42,7 @@
                         style="background-color: black;">Services</a>
                 </li>
                 <li class="mx-4 my-0 md:my-0 bg-black">
-                    <a href="{{ url('/services') }}" class="text x1 hover:text-yellow-500 duration-500"
+                    <a href="{{ url('/about') }}" class="text x1 hover:text-yellow-500 duration-500"
                         style="background-color: black;">À propos</a>
                 </li>
                 <li class="mx-4 my-0 md:my-0 bg-black">

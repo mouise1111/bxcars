@@ -1,14 +1,11 @@
-<div class="container2">
-    @yield('content')
-</div>
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Membres - BX Cars</title>
+    <title>Membres | BX Cars</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('bxlogo-modified.png') }}">.
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -50,7 +47,7 @@
                             style="background-color: black;">Services</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/services') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        <a href="{{ url('/about') }}" class="text x1 hover:text-yellow-500 duration-500"
                             style="background-color: black;">À propos</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
@@ -112,7 +109,7 @@
             @endif
             <h1 class="text-7xl font-semibold text-white mb-4">L'équipe BX Cars</h1>
             <p class="text-white mb-6">Vous pouvez fréquemment changer le tableau. Il est automatiquement mis à jour sur
-                la page "A propos". </p>
+                la page "À propos". </p>
             <div class=" text-white flex flex-col lg:flex-row justify-center items-start lg:items-center py-8">
                 <div class="max-w-md mx-4 mb-8 p-6 rounded-lg shadow border-white border-2 rounded-lg">
                     <h2 class="text-2xl font-semibold text-center mb-6">Ajouter un nouveau membre</h2>

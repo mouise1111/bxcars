@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Accueil - BX Cars</title>
+    <title>Accueil | BX Cars</title>
+    <link href="/bxlogo-modified.png" sizes="32x32" rel="stylesheet" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
