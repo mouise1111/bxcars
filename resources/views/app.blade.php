@@ -242,20 +242,20 @@
     </section>
 
     <section class="px-32 py-32 text-black bg-gray-100">
-        <h2 class="mb-16 text-4xl font-bold">Ce que disent nos clients</h2>
-        <p class="text-2xl font-semibold"><span>“</span>J'ai été vraiment impressionné par le niveau de service que j'ai
-            reçu de cette entreprise de location de voitures. Le processus était fluide et facile, et la voiture que
-            j'ai louée était en excellent état. Le personnel était sympathique et serviable, et je me suis senti bien
-            pris en charge tout au long de ma période de location.<span>“</span>
-        </p>
+        <h2 class="mb-16 text-4xl font-bold">Richard Branson a dit ...</h2>
+        <p class="text-2xl font-semibold"><span>“</span>Si quelqu'un vous offre une opportunité incroyable mais que vous
+            n'êtes pas sûr de pouvoir le faire, dites oui - puis apprenez comment le faire plus tard!<span>“</span>
+        </p> <span>Avec BX Cars, saisissez l'opportunité de partir à l'aventure, même si c'est sur un coup
+            de tête, avec la facilité et la flexibilité de la location de voiture.</span>
         <div class="flex flex-row justify-between mt-8">
             <div class="flex flex-row gap-4">
-                <div class="w-20 h-20 bg-gray-500 rounded-full">
-                    {{-- <img src="" alt="profile picture of the car renter"> --}}
+                <div class="w-20 h-20 bg-gray-500 rounded-full overflow-hidden">
+                    <img src="/branson.jpg" alt="" class="object-cover w-full h-full">
                 </div>
                 <div class="flex flex-col justify-between py-3">
-                    <h4 class="font-bold">Nawfel Ajari</h4>
-                    <h6 class="text-gray-800">De <span class="font-semibold">Bruxelles</span></h6>
+                    <h4 class="font-bold">Richard Branson</h4>
+                    <h6 class="text-gray-800">Autobiographie <span class="font-semibold">Finding My Virginity</span>
+                    </h6>
                 </div>
             </div>
             <div class="flex flex-row gap-2 m-4 mt-4 ml-auto lg:mt-auto">
