@@ -44,8 +44,19 @@
 
 <body>
     <header>
-        <div class="relative min-h-screen bg-black"
-            style="background-image: url('{{ asset('aboutbg.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="relative min-h-screen bg-black absolute -top-10"
+            style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            @if(session('success'))
+            <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
+                {{ session('success') }}
+            </div>
+
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 4000);
+            </script>
+            @endif
             <div x-data="{ open: false }">
                 <nav class="flex justify-between items-center py-8 px-4">
                     <button @click="open = !open" class="space-y-2 focus:outline-none">
@@ -76,6 +87,7 @@
                         @endauth
                         @endif
                     </div>
+
                 </nav>
 
                 <!-- Menu déroulant -->
@@ -83,7 +95,7 @@
                     :class="{'-translate-x-full': !open, 'translate-x-0': open}">
                     <button @click="open = false" class="p-4 text-white hover:text-red-400">
                         <img src="/close-menu-icon.png" alt="closing the menu button icon"
-                            class="w-1/2 rounded-full h-1/2 ">
+                            class="w-1/2 rounded-full h-1/2 mt-5 ">
                     </button>
                     <div class="flex flex-col p-4">
                         <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>

@@ -31,7 +31,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="relative min-h-screen bg-black absolute -top-10"
+    style="background-image: url('{{ asset('wallpapertanger4.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <header>
         @if(session('success'))
         <div id="success-message" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4 z-50">
@@ -43,8 +44,7 @@
             }, 3000); 
         </script>
         @endif
-        <div class="relative min-h-screen bg-black"
-            style="background-image: url('{{ asset('wallpapertanger4.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div>
             <div x-data="{ open: false }">
                 <nav class="flex justify-between items-center py-8 px-4">
                     <button @click="open = !open" class="space-y-2 focus:outline-none">
@@ -82,7 +82,7 @@
                     :class="{'-translate-x-full': !open, 'translate-x-0': open}">
                     <button @click="open = false" class="p-4 text-white hover:text-red-400">
                         <img src="/close-menu-icon.png" alt="closing the menu button icon"
-                            class="w-1/2 rounded-full h-1/2 ">
+                            class="w-1/2 rounded-full h-1/2 mt-10">
                     </button>
                     <div class="flex flex-col p-4">
                         <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>

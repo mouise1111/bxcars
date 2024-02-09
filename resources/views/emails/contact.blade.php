@@ -35,7 +35,7 @@
 
 <body>
     <header>
-        <div class="relative min-h-screen bg-black"
+        <div class="relative min-h-screen bg-black "
             style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             @if(session('success'))
             <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">

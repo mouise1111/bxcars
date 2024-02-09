@@ -1,3 +1,15 @@
+body,
+html {
+    overflow-x: hidden;
+}
+
+html,
+body,
+header {
+    margin: 0;
+    padding: 0;
+}
+
 .icons {
     width: 20px;
 }
