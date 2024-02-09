@@ -33,10 +33,10 @@
 
 </head>
 
-<body>
+<body
+    style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <header>
-        <div class="relative min-h-screen bg-black "
-            style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="relative min-h-screen ">
             @if(session('success'))
             <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
                 {{ session('success') }}
@@ -57,23 +57,18 @@
                     </button>
                     <!-- Logo -->
                     <a href="/" class="text-3xl uppercase logo text-white">bxcars</a>
-                    <div>
+                    <div class="hidden sm:flex">
                         @if(Route::has('login'))
                         @auth
                         <a class="text-white pr-2 hover:text-yellow-500" href="{{ url('/dashboard') }}"
-                            style="cursor: pointer;">
-                            ADMIN
-                        </a>
-                        <span class="text-white pr-2">
-                            |
-                        </span>
+                            style="cursor: pointer;">ADMIN</a>
+                        <span class="text-white pr-2">|</span>
                         <span class="pr-4 text-white hover:text-yellow-500" style="cursor: pointer;"
                             onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <img class="inline cursor-pointer h-7" src="{{ asset('logout.png') }}" alt="Déconnexion">
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
                         </form>
                         @endauth
                         @endif
@@ -86,7 +81,7 @@
                     :class="{'-translate-x-full': !open, 'translate-x-0': open}">
                     <button @click="open = false" class="p-4 text-white hover:text-red-400">
                         <img src="/close-menu-icon.png" alt="closing the menu button icon"
-                            class="w-1/2 rounded-full h-1/2 ">
+                            class="w-1/2 rounded-full h-1/2 w-8 h-8">
                     </button>
                     <div class="flex flex-col p-4">
                         <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>
@@ -101,6 +96,11 @@
                         <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
                         <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
                         <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                        <a href="#" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500"
+                            onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                            <img class="inline cursor-pointer h-3" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                            Déconnexion
+                        </a>
                         @endauth
                         @endif
                     </div>
@@ -109,56 +109,43 @@
 
 
                 <section>
-                    <div class="min-h-screen flex flex-col justify-center items-center text-white ">
+                    <div class="min-h-screen flex flex-col justify-center items-center text-white px-4 lg:px-0">
                         <div class="text-center">
-                            <h1 class="text-7xl font-bold">CONTACTEZ-NOUS</h1>
-                            <p class="text-4xl  mt-2 mb-10">
-                                Assistance Immédiate – Parce que votre temps est précieux
-                            </p>
+                            <h1 class="text-5xl lg:text-7xl font-bold">CONTACTEZ-NOUS</h1>
+                            <p class="text-2xl lg:text-4xl mt-2 mb-10">Assistance Immédiate – Parce que votre temps est
+                                précieux</p>
                         </div>
-                        <!-- Flex container pour le formulaire et les paragraphes avec espacement spécifié -->
-                        <div class="flex flex-wrap justify-center items-start w-full mx-[-2px]">
-                            <div class=" lg:mt-0 w-full lg:w-2/5 lg:ml-[2px]">
-                                <div class=" story-section">
-                                    <div class="story-content space-y-4">
-                                        <p class="story-paragraph">Chez BX Cars, notre priorité est de vous fournir une
-                                            expérience
+                        <!-- Flex container ajusté pour la responsivité et arrière-plan -->
+                        <div class="flex flex-col lg:flex-row justify-center items-start w-full">
+                            <div class="lg:w-2/5 lg:px-4 mt-10 lg:mt-0">
+                                <!-- Conteneur avec arrière-plan noir semi-transparent et arrondi -->
+                                <div class="bg-black bg-opacity-50 p-20 rounded-lg shadow-lg">
+                                    <div class="space-y-4 text-center">
+                                        <p>Chez BX Cars, notre priorité est de vous fournir une expérience
                                             exceptionnelle, que ce soit à travers notre service client dédié, notre
-                                            support
-                                            technique pour vos réservations, ou notre assistance véhicule. Que vous ayez
-                                            besoin
-                                            d'aide pour naviguer dans nos services, de conseils pour choisir l'option
-                                            qui
-                                            vous
-                                            convient le mieux, ou d'assistance technique, notre équipe est là pour vous.
-                                            Notre
-                                            objectif est de répondre à toutes vos questions et préoccupations avec
-                                            rapidité
-                                            et
-                                            efficacité, garantissant ainsi votre entière satisfaction.</p>
-                                        <p class="story-paragraph">Êtes-vous à la recherche d'une opportunité de
-                                            carrière
-                                            enrichissante au sein d'une entreprise dynamique et en pleine croissance ?
-                                            BX
-                                            Cars est
-                                            constamment à la recherche de nouveaux talents pour rejoindre notre
-                                            équipe. Que votre expertise réside dans le service à la clientèle, le
-                                            support
-                                            technique,
-                                            la gestion de flotte, ou que vous souhaitiez nous proposer une compétence
-                                            unique, nous
-                                            serions ravis d'en savoir plus sur vous. BX Cars s'engage à créer un
-                                            environnement de
-                                            travail inclusif et stimulant, où chaque membre de l'équipe peut se
-                                            développer
-                                            professionnellement et contribuer à notre succès commun.</p>
+                                            support technique pour vos réservations, ou notre assistance véhicule. Que
+                                            vous ayez besoin d'aide pour naviguer dans nos services, de conseils pour
+                                            choisir l'option qui vous convient le mieux, ou d'assistance technique,
+                                            notre équipe est là pour vous. Notre objectif est de répondre à toutes vos
+                                            questions et préoccupations avec rapidité et efficacité, garantissant ainsi
+                                            votre entière satisfaction.</p>
+                                        <p>Êtes-vous à la recherche d'une opportunité de carrière enrichissante au sein
+                                            d'une entreprise dynamique et en pleine croissance ? BX Cars est constamment
+                                            à la recherche de nouveaux talents pour rejoindre notre équipe. Que votre
+                                            expertise réside dans le service à la clientèle, le support technique, la
+                                            gestion de flotte, ou que vous souhaitiez nous proposer une compétence
+                                            unique, nous serions ravis d'en savoir plus sur vous. BX Cars s'engage à
+                                            créer un environnement de travail inclusif et stimulant, où chaque membre de
+                                            l'équipe peut se développer professionnellement et contribuer à notre succès
+                                            commun.</p>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="w-full lg:w-1/5 bg-gray-800 p-6 rounded-lg shadow-lg mt-20">
+                            <div
+                                class="mb-5 w-full lg:w-1/3 bg-gray-800 p-6 rounded-lg shadow-lg mt-10 lg:mt-0 lg:mx-4">
                                 <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
                                     @csrf
+                                    <!-- Formulaire adapté avec des inputs et boutons responsive -->
                                     <div>
                                         <label for="email" class="block text-sm font-medium">Votre Email</label>
                                         <input type="email" id="email" name="email"
@@ -171,8 +158,7 @@
                                             class="mt-1 block w-full p-2 text-gray-500 bg-gray-700 border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50">
                                             <option value="">Veuillez sélectionner</option>
                                             <option value="service_client">Service client</option>
-                                            <option value="support_technique">Support technique - Réservation
-                                            </option>
+                                            <option value="support_technique">Support technique - Réservation</option>
                                             <option value="support_vehicule">Support - Véhicule</option>
                                             <option value="recrutement">Recrutement</option>
                                             <option value="autre">Autre</option>
@@ -197,21 +183,18 @@
                 </section>
 
 
-
-
-
     </header>
 
     <footer class="text-white bg-black border-t-2 border-gray-200">
-        <div class="flex flex-col lg:flex-row items-center justify-between py-4 lg:px-12">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 gap-4">
             <div>
-                <h1 class="text-3xl uppercase logo">Bxcars</h1>
+                <h1 class="text-2xl lg:text-3xl uppercase logo">Bxcars</h1>
             </div>
-            <div class="flex justify-between gap-4">
+            <div class="flex justify-between gap-2 lg:gap-4">
                 <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
                 <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
             </div>
-            <div class="flex flex-row gap-4">
+            <div class="flex flex-row gap-2 lg:gap-4">
                 <a href="https://www.instagram.com/bx_cars_rental/" target="_blank" rel="noopener noreferrer">
                     <div
                         class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
@@ -219,6 +202,7 @@
                     </div>
                 </a>
 
+                <!-- Facebook -->
                 <a href="https://www.facebook.com/people/Bx-Cars/pfbid0K5HQSNgyJPMsKygqBWgqgy8Mtrr99SHEcJt2s2LckipK9GatJLFvcA8r6zeYxiFel/"
                     target="_blank" rel="noopener noreferrer">
                     <div
@@ -227,6 +211,7 @@
                     </div>
                 </a>
 
+                <!-- Snapchat -->
                 <a href="https://www.snapchat.com/add/bxcars-tanger?share_id=HxAMeEKaQeY&locale=fr-BE" target="_blank"
                     rel="noopener noreferrer">
                     <div
@@ -236,11 +221,10 @@
                 </a>
             </div>
         </div>
-        <div class="w-full text-sm text-center py-2 bg-yellow-500 custom-font">
+        <div class="w-full text-xs lg:text-sm text-center py-2 bg-yellow-500 custom-font">
             <p>MADE IT WITH PASSION ♥ ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
                     target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
-
     </footer>
 </body>
 
