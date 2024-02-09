@@ -96,9 +96,16 @@
 
 
             @if(session('success'))
-            <div class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4">
+            <div id="successMessage" class="fixed top-0 left-0 right-0 bg-green-500 text-white text-center py-2 px-4">
                 {{ session('success') }}
             </div>
+
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            </script>
+
             <!-- Form Succeeded -->
             <div class="z-10 flex justify-center items-start mb-0 duration-500">
                 <div
@@ -135,7 +142,7 @@
 
             @if($futureUnavailableDates->isNotEmpty())
             <div class="flex justify-center mt-8">
-                <div class="w-full max-w-md"> <!-- Ajustez la largeur maximale ici si nécessaire -->
+                <div class="w-full max-w-md">
                     <div class="overflow-x-auto  rounded-lg">
                         <table class="table-auto w-full text-center">
                             <thead>
@@ -150,24 +157,22 @@
                             <tbody>
                                 @foreach($futureUnavailableDates as $date)
                                 @php
-                                $startDate = \Carbon\Carbon::parse($date->start_date);
-                                $endDate = \Carbon\Carbon::parse($date->end_date);
-                                // Utiliser 'j F Y' pour toujours inclure l'année dans les dates
+                                $startDate = \Carbon\Carbon::parse($date['start']);
+                                $endDate = \Carbon\Carbon::parse($date['end']);
                                 $format = 'j F Y';
                                 @endphp
                                 <tr class="bg-gray-500 border-b">
                                     <td class="px-4 py-2 border-r">{{ $startDate->translatedFormat($format) }}</td>
                                     <td class="px-4 py-2">
-                                        @if($startDate->translatedFormat('Y-m-d') !==
-                                        $endDate->translatedFormat('Y-m-d'))
+                                        @if($startDate->format('Y-m-d') !== $endDate->format('Y-m-d'))
                                         {{ $endDate->translatedFormat($format) }}
                                         @else
-                                        <!-- Si les dates sont identiques, affiche juste une fois la date -->
                                         {{ $startDate->translatedFormat($format) }}
                                         @endif
                                     </td>
                                 </tr>
                                 @endforeach
+
 
                             </tbody>
                         </table>

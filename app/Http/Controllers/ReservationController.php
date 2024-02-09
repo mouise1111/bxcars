@@ -80,27 +80,31 @@ class ReservationController extends Controller
     public function accept($id)
     {
         $reservation = Reservation::findOrFail($id);
-        $reservation->status = 'accepted';
-        $reservation->save();
+        if ($this->isCarAvailable($reservation->car_id, $reservation->start_date, $reservation->end_date)) {
+            $reservation->status = 'accepted';
+            $reservation->save();
 
-        // Générer le PDF
-        $pdf = PDF::loadView('emails.reservation_pdf', ['reservation' => $reservation]);
+            $this->updateCarAvailabilityOnReservation($reservation->car_id, false);
 
-        // L'email du destinataire est directement un champ de la réservation
-        $to_email = $reservation->email; // Utilisez directement l'email de la réservation
+            $pdf = PDF::loadView('emails.reservation_pdf', ['reservation' => $reservation]);
 
-        $data = [
-            'reservation' => $reservation // Passer l'objet reservation complet
-        ];
+            Mail::send('emails.reservation.confirmation', ['reservation' => $reservation], function ($message) use ($pdf, $reservation) {
+                $message->to($reservation->email)
+                    ->subject('Confirmation de Réservation')
+                    ->attachData($pdf->output(), "confirmation_reservation.pdf");
+            });
 
-        Mail::send('emails.reservation.confirmation', $data, function ($message) use ($pdf, $reservation) {
-            $message->to($reservation->email)
-                ->subject('Confirmation de Réservation')
-                ->attachData($pdf->output(), "confirmation_reservation.pdf");
-        });
-        return redirect()->route('dashboard')->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
-
+            return redirect()->route('dashboard')->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
+        } else {
+            return back()->withErrors(['error' => 'La voiture n\'est plus disponible pour les dates sélectionnées.']);
+        }
     }
+
+    private function updateCarAvailabilityOnReservation($carId, $available)
+    {
+        Car::where('id', $carId)->update(['disponible' => $available ? 1 : 0]);
+    }
+
 
     public function isAvailableToday()
     {
@@ -117,11 +121,7 @@ class ReservationController extends Controller
     public function reject($id)
     {
         $reservation = Reservation::findOrFail($id);
-
-        // Supprimer la réservation
         $reservation->delete();
-
-        // Rediriger vers le dashboard (ou une autre page de votre choix) avec un message de succès
         return redirect()->route('dashboard')->with('success', 'Réservation supprimée avec succès.');
     }
 
@@ -157,16 +157,16 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::findOrFail($id);
-        $email = $reservation->email; // Assurez-vous que l'email est disponible dans votre modèle de réservation
-        $firstName = $reservation->first_name; // Pour personnaliser l'email d'annulation
+        $email = $reservation->email;
+        $firstName = $reservation->first_name;
 
-        // Envoyer l'email d'annulation ici
+
         Mail::send('emails.reservation_canceled', ['firstName' => $firstName, 'reservation' => $reservation], function ($message) use ($email) {
             $message->to($email)->subject('Annulation de votre réservation');
         });
 
 
-        // Supprimer la réservation
+
         $reservation->delete();
 
         return back()->with('success', 'La réservation a été annulée avec succès.');
@@ -174,27 +174,59 @@ class ReservationController extends Controller
 
     public function getUnavailableDatesForCar($carId)
     {
-        $now = Carbon::now()->startOfDay(); // Début de la journée.
+        $now = Carbon::now()->startOfDay();
         $reservations = Reservation::where('car_id', $carId)
             ->where('status', 'accepted')
             ->get();
 
-        $dates = collect(); // Collection pour stocker les dates uniques.
+        $dates = collect();
 
         foreach ($reservations as $reservation) {
+            $startDate = Carbon::parse($reservation->start_date);
             $endDate = Carbon::parse($reservation->end_date);
-            if ($endDate->timestamp >= $now->timestamp) {
-                // Clé unique pour la date pour éviter les duplications.
-                $key = $endDate->format('Y-m-d');
+            if ($endDate->gte($now)) {
+
+                $key = $startDate->format('Y-m-d') . '_' . $endDate->format('Y-m-d');
                 if (!$dates->has($key)) {
-                    $dates->put($key, $reservation); // Stocke la réservation si la date est unique.
+                    $dates->put($key, [
+                        'start' => $reservation->start_date,
+                        'end' => $reservation->end_date,
+                    ]);
                 }
             }
         }
 
-        // Après avoir filtré et collecté les dates d'indisponibilité...
-        return $dates->sortBy(function ($reservation) {
-            return Carbon::parse($reservation->start_date);
+        return $dates->map(function ($date) {
+            return ['start' => $date['start'], 'end' => $date['end']];
         })->values();
+    }
+
+    public function confirmReservation($reservationId)
+    {
+        $reservation = Reservation::findOrFail($reservationId);
+
+        if ($reservation->status === 'pending') {
+            $reservation->status = 'accepted';
+            $reservation->save();
+
+
+            $this->updateCarAvailabilityOnReservation($reservation->car_id, $reservation->start_date, $reservation->end_date);
+        }
+    }
+
+
+    public function checkAndUpdateCarAvailability()
+    {
+        $yesterday = now()->subDay()->endOfDay();
+        $carsWithEndedReservations = Reservation::where('status', 'accepted')
+            ->where('end_date', '<=', $yesterday)
+            ->distinct()
+            ->pluck('car_id');
+
+        foreach ($carsWithEndedReservations as $carId) {
+            if ($this->isCarAvailable($carId, now(), now())) {
+                Car::where('id', $carId)->update(['disponible' => 1]);
+            }
+        }
     }
 }
