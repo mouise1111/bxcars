@@ -147,7 +147,9 @@ class ReservationController extends Controller
             ->where('status', 'accepted')
             ->get(['start_date', 'end_date']);
 
-        return view('reservation.create', compact('carId', 'car', 'unavailableDates'));
+        $futureUnavailableDates = $this->getUnavailableDatesForCar($carId);
+
+        return view('reservation.create', compact('carId', 'car', 'unavailableDates', 'futureUnavailableDates'));
 
 
     }
@@ -172,20 +174,27 @@ class ReservationController extends Controller
 
     public function getUnavailableDatesForCar($carId)
     {
-        // Récupérer uniquement les réservations acceptées pour le véhicule spécifié
+        $now = Carbon::now()->startOfDay(); // Début de la journée.
         $reservations = Reservation::where('car_id', $carId)
-            ->where('status', 'accepted') // Filtrer par statut accepté
-            ->get(['start_date', 'end_date']);
+            ->where('status', 'accepted')
+            ->get();
 
-        $unavailableDates = [];
+        $dates = collect(); // Collection pour stocker les dates uniques.
+
         foreach ($reservations as $reservation) {
-            // Ajouter chaque période de réservation acceptée aux dates indisponibles
-            $unavailableDates[] = [
-                'start' => $reservation->start_date,
-                'end' => $reservation->end_date,
-            ];
+            $endDate = Carbon::parse($reservation->end_date);
+            if ($endDate->timestamp >= $now->timestamp) {
+                // Clé unique pour la date pour éviter les duplications.
+                $key = $endDate->format('Y-m-d');
+                if (!$dates->has($key)) {
+                    $dates->put($key, $reservation); // Stocke la réservation si la date est unique.
+                }
+            }
         }
 
-        return $unavailableDates;
+        // Après avoir filtré et collecté les dates d'indisponibilité...
+        return $dates->sortBy(function ($reservation) {
+            return Carbon::parse($reservation->start_date);
+        })->values();
     }
 }

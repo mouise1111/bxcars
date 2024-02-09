@@ -88,7 +88,7 @@
     <script>
         setTimeout(function () {
             document.getElementById('successMessage').style.display = 'none';
-        }, 3000); // 
+        }, 8000); // Le message disparaîtra après 8 secondes
     </script>
     @endif
 

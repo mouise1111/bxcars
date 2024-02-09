@@ -9,8 +9,8 @@ class UserController extends Controller
 {
     public function create()
     {
-        $users = User::all(); // Récupère tous les utilisateurs
-        return view('user.create', compact('users')); // Passe les utilisateurs à la vue
+        $users = User::all();
+        return view('user.create', compact('users'));
 
 
     }
@@ -29,14 +29,11 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        // Rediriger ou afficher un message de succès
         return redirect()->route('user.create')->with('success', 'Utilisateur créé avec succès.');
     }
     public function __construct()
     {
-        $this->middleware('auth'); // Assurez-vous que l'utilisateur est connecté
-        // $this->middleware('isAdmin'); // Middleware personnalisé pour vérifier si l'utilisateur est admin
+        $this->middleware('auth');
     }
 
     public function destroy($id)

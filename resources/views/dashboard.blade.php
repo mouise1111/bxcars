@@ -78,18 +78,9 @@
 
     <main class="relative min-h-screen bg-black"
         style="background-image: url('{{ asset('wallpapertanger.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            @if(session('success'))
-            <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
-                {{ session('success') }}
-            </div>
+        {{-- resources/views/admin/reservations.blade.php --}}
 
-            <script>
-                setTimeout(function () {
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 4000);
-            </script>
-            @endif
+        <div class="mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <h1 class="text-3xl font-semibold text-white mb-4">Réservations en attente</h1>
             <p class="text-white mb-6">Les acceptations de demandes en attente envoient un message automatique et
                 génèrent un document PDF pour le client. Elles bloquent également les dates sélectionnées.</p>
