@@ -22,7 +22,7 @@ class ContactMail extends Mailable
 
     public function build()
     {
-        return $this->from('exemple@votredomaine.com')
+        return $this->from('info@bxcars.be')
             ->subject('BX Cars Contact - Nouveau message')
             ->view('emails.dataEmail');
     }

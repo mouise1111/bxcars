@@ -42,8 +42,28 @@
         </div>
         <div class="content">
             <p><strong>Email :</strong> {{ $data['email'] }}</p>
-            <p><strong>Sujet :</strong> {{ $data['subject'] }}</p>
-            <p><strong>Message :</strong><br>{{ nl2br(e($data['message'])) }}</p>
+            <p><strong>En rapport avec :</strong> 
+    @switch($data['subject'])
+        @case('service_client')
+            Service client
+            @break
+        @case('support_technique')
+            Support technique - Réservation
+            @break
+        @case('support_vehicule')
+            Support - Véhicule
+            @break
+        @case('recrutement')
+            Recrutement
+            @break
+        @case('autre')
+            Autre
+            @break
+        @default
+            Sujet non spécifié
+    @endswitch
+</p>
+            <p><strong>Message :</strong><br>{!! nl2br($data['message']) !!}</p>
         </div>
         <div class="footer">
             Ce message vous est envoyé automatiquement. Pour répondre, cliquez simplement sur répondre à cet email.<br>
