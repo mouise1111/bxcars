@@ -89,74 +89,83 @@
                             class="py-2 text-yellow-500 border-b-2 border-gray-100">Services</a>
                         <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À propos</a>
                         <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                        @if(Route::has('login'))
+                        @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="py-2 text-gray-400 hover:text-yellow-500">Réservations</a>
+                        <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
+                        <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
+                        <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                        @endauth
+                        @endif
                     </div>
                 </div>
-                <h1 class="text-8xl mt-20 font-bold text-white text-center lg:px-32">
-                    SERVICES
-                </h1>
+            </div>
+            <h1 class="text-8xl mt-20 font-bold text-white text-center lg:px-32">
+                SERVICES
+            </h1>
 
-                <h1 class="text-5xl mt-20 font-bold text-white text-center lg:px-32">
-                    Explorez la gamme complète de nos services dédiés à rendre votre expérience de location unique.
-                </h1>
-                <div class="min-h-screen flex flex-col items-center justify-center">
-                    <div
-                        class="bg-gray-800 text-white w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto p-8 rounded-lg shadow-lg">
-                        <h1 class="text-4xl font-bold text-center mb-4">Nos Services</h1>
-                        <p class="text-xl text-center mb-8">Découvrez l'étendue de nos services sur mesure, conçus pour
-                            transformer votre location en une expérience véritablement exceptionnelle.</p>
+            <h1 class="text-5xl mt-20 font-bold text-white text-center lg:px-32">
+                Explorez la gamme complète de nos services dédiés à rendre votre expérience de location unique.
+            </h1>
+            <div class="min-h-screen flex flex-col items-center justify-center">
+                <div class="bg-gray-800 text-white w-full md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto p-8 rounded-lg shadow-lg">
+                    <h1 class="text-4xl font-bold text-center mb-4">Nos Services</h1>
+                    <p class="text-xl text-center mb-8">Découvrez l'étendue de nos services sur mesure, conçus pour
+                        transformer votre location en une expérience véritablement exceptionnelle.</p>
 
-                        <!-- Services List -->
-                        <div class="space-y-4">
-                            <!-- Service 1 -->
-                            <div
-                                class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-                                <h2 class="text-2xl font-semibold">Location courte et longue durée</h2>
-                                <p>Que vous ayez besoin d'une voiture pour un jour, une semaine, ou un mois, nous
-                                    offrons des tarifs flexibles adaptés à vos besoins.</p>
-                            </div>
-
-                            <!-- Service 2 -->
-                            <div
-                                class="bg-white text-gray-800 p-4 rounded-lg  transition-transform duration-300 ease-in-out transform hover:scale-105">
-                                <h2 class="text-2xl font-semibold">Livraison et récupération</h2>
-                                <p>Profitez de nos services gratuits de livraison et récupération à l'aéroport, à
-                                    l'agence ou
-                                    à dans une autre ville au Maroc pour une expérience sans tracas.</p>
-                            </div>
-
-                            <!-- Service 3 -->
-                            <div
-                                class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-                                <h2 class="text-2xl font-semibold">Assurance complète</h2>
-                                <p>Tous nos véhicules sont couverts par une assurance complète pour vous garantir une
-                                    tranquillité d'esprit totale pendant la location.</p>
-                            </div>
-
-                            <!-- Service 4 -->
-                            <div
-                                class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-                                <h2 class="text-2xl font-semibold">Sélection triée sur le volet</h2>
-                                <p>Découvrez notre sélection soigneusement choisie de véhicules récents, couvrant vos
-                                    besoins essentiels depuis les citadines agiles et économiques jusqu'au confort d'un
-                                    SUV de luxe. Chacun de nos modèles est sélectionné pour offrir une expérience de
-                                    conduite exceptionnelle, adaptée à vos exigences de mobilité.</p>
-                            </div>
-
-
-                            <!-- Service 5 -->
-                            <div
-                                class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-                                <h2 class="text-2xl font-semibold">Assistance routière 24/7</h2>
-                                <p>Où que vous soyez, notre service d'assistance routière est disponible 24/7 pour vous
-                                    aider en cas de besoin.</p>
-                            </div>
-
-                            <!-- Additional Services -->
-                            <p class="text-center mt-8 font-medium">Et bien plus encore... Découvrez tous nos services
-                                en nous contactant ou en visitant notre agence!</p>
+                    <!-- Services List -->
+                    <div class="space-y-4">
+                        <!-- Service 1 -->
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
+                            <h2 class="text-2xl font-semibold">Location courte et longue durée</h2>
+                            <p>Que vous ayez besoin d'une voiture pour un jour, une semaine, ou un mois, nous
+                                offrons des tarifs flexibles adaptés à vos besoins.</p>
                         </div>
+
+                        <!-- Service 2 -->
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-lg  transition-transform duration-300 ease-in-out transform hover:scale-105">
+                            <h2 class="text-2xl font-semibold">Livraison et récupération</h2>
+                            <p>Profitez de nos services gratuits de livraison et récupération à l'aéroport, à
+                                l'agence ou
+                                à dans une autre ville au Maroc pour une expérience sans tracas.</p>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
+                            <h2 class="text-2xl font-semibold">Assurance complète</h2>
+                            <p>Tous nos véhicules sont couverts par une assurance complète pour vous garantir une
+                                tranquillité d'esprit totale pendant la location.</p>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
+                            <h2 class="text-2xl font-semibold">Sélection triée sur le volet</h2>
+                            <p>Découvrez notre sélection soigneusement choisie de véhicules récents, couvrant vos
+                                besoins essentiels depuis les citadines agiles et économiques jusqu'au confort d'un
+                                SUV de luxe. Chacun de nos modèles est sélectionné pour offrir une expérience de
+                                conduite exceptionnelle, adaptée à vos exigences de mobilité.</p>
+                        </div>
+
+
+                        <!-- Service 5 -->
+                        <div
+                            class="bg-white text-gray-800 p-4 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
+                            <h2 class="text-2xl font-semibold">Assistance routière 24/7</h2>
+                            <p>Où que vous soyez, notre service d'assistance routière est disponible 24/7 pour vous
+                                aider en cas de besoin.</p>
+                        </div>
+
+                        <!-- Additional Services -->
+                        <p class="text-center mt-8 font-medium">Et bien plus encore... Découvrez tous nos services
+                            en nous contactant ou en visitant notre agence!</p>
                     </div>
                 </div>
+            </div>
     </header>
 
 

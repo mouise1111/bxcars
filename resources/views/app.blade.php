@@ -63,14 +63,19 @@
                     <img src="/close-menu-icon.png" alt="closing the menu button icon"
                         class="w-1/2 rounded-full h-1/2 ">
                 </button>
-                <div class="flex flex-col px-4 py-2 border-2 border-gray-500 rounded-lg">
-                    <a href="#" class="py-2 text-yellow-500 border-b-2 border-gray-100">Accueil</a>
-                    <a href="{{ url('/services') }}"
-                        class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">Services</a>
-                    <a href="{{ url('/about') }}"
-                        class="py-2 text-white border-b-2 border-gray-100 hover:text-yellow-500">À propos</a>
-                    <a href="{{ url('/contact') }}"
-                        class="py-2 mb-4 text-white border-b-2 border-gray-100 hover:text-yellow-500">Contact</a>
+                <div class="flex flex-col p-4">
+                    <a href="{{ url('/') }}" class="py-2 text-yellow-500 border-b-2 border-gray-100">Accueil</a>
+                    <a href="{{ url('/services') }}" class="py-2 text-white hover:text-yellow-500">Services</a>
+                    <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À propos</a>
+                    <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                    @if(Route::has('login'))
+                    @auth
+                    <a href="{{ url('/dashboard') }}" class="py-2 text-gray-400 hover:text-yellow-500">Réservations</a>
+                    <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
+                    <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
+                    <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                    @endauth
+                    @endif
                 </div>
             </div>
 

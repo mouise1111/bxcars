@@ -10,10 +10,19 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
+        $subjectLabels = [
+            'service_client' => 'Service client',
+            'support_technique' => 'Support technique - Réservation',
+            'support_vehicule' => 'Support - Véhicule',
+            'recrutement' => 'Recrutement',
+            'autre' => 'Autre',
+        ];
+
         $request->validate([
             'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required|string',
+
         ]);
 
         $data = $request->all();

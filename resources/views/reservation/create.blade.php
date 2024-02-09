@@ -75,6 +75,15 @@
                         <a href="{{ url('/about') }}" class="py-2 text-white hover:text-yellow-500">À
                             propos</a>
                         <a href="{{ url('/contact') }}" class="py-2 text-white hover:text-yellow-500">Contact</a>
+                        @if(Route::has('login'))
+                        @auth
+                        <a href="{{ url('/dashboard') }}"
+                            class="py-2 text-gray-400 hover:text-yellow-500">Réservations</a>
+                        <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
+                        <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
+                        <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                        @endauth
+                        @endif
                     </div>
                 </div>
             </div>

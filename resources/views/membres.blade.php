@@ -46,7 +46,21 @@
                         <a href="{{ url('/') }}" class="text x1 hover:text-yellow-500 duration-500">Accueil</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/dashboard') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        <a href="{{ url('/services') }}" class="text x1 hover:text-yellow-500 duration-500"
+                            style="background-color: black;">Services</a>
+                    </li>
+                    <li class="mx-4 my-0 md:my-0 bg-black">
+                        <a href="{{ url('/services') }}" class="text x1 hover:text-yellow-500 duration-500"
+                            style="background-color: black;">À propos</a>
+                    </li>
+                    <li class="mx-4 my-0 md:my-0 bg-black">
+                        <a href="{{ url('/contact') }}" class="text x1 hover:text-yellow-500 duration-500"
+                            style="background-color: black;">Contact</a>
+                    </li>
+                    |
+                    <li class="mx-4 my-0 md:my-0 bg-black">
+                        <a href="{{ url('/dashboard') }}"
+                            class="text x1 text-gray-400 hover:text-yellow-500 duration-500"
                             style="background-color: black;">Réservations</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
@@ -54,11 +68,13 @@
                             style="background-color: black;">Membres</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/cars/create') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        <a href="{{ url('/cars/create') }}"
+                            class="text x1 text-gray-400 hover:text-yellow-500 duration-500"
                             style="background-color: black;">MyCARS</a>
                     </li>
                     <li class="mx-4 my-0 md:my-0 bg-black">
-                        <a href="{{ url('/user/create') }}" class="text x1 hover:text-yellow-500 duration-500"
+                        <a href="{{ url('/user/create') }}"
+                            class="text x1 text-gray-400 hover:text-yellow-500 duration-500"
                             style="background-color: black;">MyADMIN</a>
                     </li>
                 </ul>
