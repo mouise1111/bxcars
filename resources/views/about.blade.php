@@ -42,10 +42,10 @@
     </style>
 </head>
 
-<body>
+<body
+    style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <header>
-        <div class="relative min-h-screen bg-black absolute -top-10"
-            style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="relative min-h-screen absolute -top-10">
             @if(session('success'))
             <div id="successMessage" class="bg-green-500 text-white text-center p-5 rounded mb-2">
                 {{ session('success') }}
@@ -66,23 +66,18 @@
                     </button>
                     <!-- Logo -->
                     <a href="/" class="text-3xl uppercase logo text-white">bxcars</a>
-                    <div>
+                    <div class="hidden sm:flex">
                         @if(Route::has('login'))
                         @auth
                         <a class="text-white pr-2 hover:text-yellow-500" href="{{ url('/dashboard') }}"
-                            style="cursor: pointer;">
-                            ADMIN
-                        </a>
-                        <span class="text-white pr-2">
-                            |
-                        </span>
+                            style="cursor: pointer;">ADMIN</a>
+                        <span class="text-white pr-2">|</span>
                         <span class="pr-4 text-white hover:text-yellow-500" style="cursor: pointer;"
                             onclick="window.location.href='{{ url('profile') }}'">{{ Auth::user()->name }}</span>
                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <img class="inline cursor-pointer h-7" src="{{ asset('logout.png') }}" alt="Déconnexion">
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
                         </form>
                         @endauth
                         @endif
@@ -95,7 +90,7 @@
                     :class="{'-translate-x-full': !open, 'translate-x-0': open}">
                     <button @click="open = false" class="p-4 text-white hover:text-red-400">
                         <img src="/close-menu-icon.png" alt="closing the menu button icon"
-                            class="w-1/2 rounded-full h-1/2 mt-5 ">
+                            class="w-1/2 rounded-full h-1/2 w-8 h-8 mt-5">
                     </button>
                     <div class="flex flex-col p-4">
                         <a href="{{ url('/') }}" class="py-2 text-white hover:text-yellow-500">Accueil</a>
@@ -110,38 +105,48 @@
                         <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
                         <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
                         <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                        <a href="#" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500"
+                            onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                            <img class="inline cursor-pointer h-3" src="{{ asset('logout.png') }}" alt="Déconnexion">
+                            Déconnexion
+                        </a>
                         @endauth
                         @endif
                     </div>
                 </div>
             </div>
-            <h1 class="text-8xl mt-20 font-bold text-white text-center lg:px-32">
+            <h1
+                class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl mt-10 md:mt-20 font-bold text-white text-center px-4 lg:px-32">
                 À PROPOS
             </h1>
 
-            <h1 class="text-5xl mt-20 font-bold text-white text-center lg:px-32">
+            <h1
+                class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl mt-10 md:mt-20 font-bold text-white text-center px-4 lg:px-32">
                 Découvrez l'Histoire Derrière Chaque Kilomètre avec BX Cars
             </h1>
-            <div class="story-section mt-40">
-                <div class="story-content">
-                    <p class="story-paragraph">Dans l'effervescence de Bruxelles, une vision audacieuse prenait forme
-                        dans
-                        l'esprit d'un jeune entrepreneur passionné par l'innovation et l'aventure. Yassine Cherradi Ben
-                        Naji, armé d'une détermination sans faille et d'un amour profond pour sa ville natale, Tanger, a
-                        décidé de transformer le paysage de la mobilité au Maroc. Son rêve? Fonder BX Cars, une
-                        entreprise
-                        synonyme de qualité, d'innovation et de confiance.</p>
-                    <p class="story-paragraph">Le voyage de Yassine n'a pas été sans embûches. Naviguant entre les défis
-                        bureaucratiques, la recherche des partenariats stratégiques, et l'instauration d'une culture
-                        d'entreprise solide, il a su avec brio poser les jalons d'une réussite remarquable. BX Cars
-                        n'est
-                        pas seulement une entreprise; c'est le reflet d'une passion, d'une ambition et d'un engagement
-                        envers la qualité et l'excellence.</p>
-                    <p class="story-paragraph">BX Cars, c'est l'histoire d'un retour aux sources, transformé en quête de
-                        perfection. C'est là, entre les ruelles chargées d'histoire de Tanger et le rythme effréné de
-                        Bruxelles, que Yassine a tissé le fil d'une entreprise destinée à devenir une référence dans le
-                        monde de la location de voitures. Rejoignez-nous pour un voyage exceptionnel, où tradition et
-                        modernité se rencontrent pour donner vie à vos rêves d'évasion.</p>
+            <div class="story-section mt-20 md:mt-40">
+                <div class="story-content px-4 md:px-10 lg:px-20">
+                    <p class="story-paragraph text-base sm:text-lg md:text-xl">
+                        Dans l'effervescence de Bruxelles, une vision audacieuse prenait forme dans l'esprit d'un jeune
+                        entrepreneur passionné par l'innovation et l'aventure. Yassine Cherradi Ben Naji, armé d'une
+                        détermination sans faille et d'un amour profond pour sa ville natale, Tanger, a décidé de
+                        transformer le paysage de la mobilité au Maroc. Son rêve? Fonder BX Cars, une entreprise
+                        synonyme de qualité, d'innovation et de confiance.
+                    </p>
+                    <p class="story-paragraph text-base sm:text-lg md:text-xl mt-4">
+                        Le voyage de Yassine n'a pas été sans embûches. Naviguant entre les défis bureaucratiques, la
+                        recherche des partenariats stratégiques, et l'instauration d'une culture d'entreprise solide, il
+                        a su avec brio poser les jalons d'une réussite remarquable. BX Cars n'est pas seulement une
+                        entreprise; c'est le reflet d'une passion, d'une ambition et d'un engagement envers la qualité
+                        et l'excellence.
+                    </p>
+                    <p class="story-paragraph text-base sm:text-lg md:text-xl mt-4">
+                        BX Cars, c'est l'histoire d'un retour aux sources, transformé en quête de perfection. C'est là,
+                        entre les ruelles chargées d'histoire de Tanger et le rythme effréné de Bruxelles, que Yassine a
+                        tissé le fil d'une entreprise destinée à devenir une référence dans le monde de la location de
+                        voitures. Rejoignez-nous pour un voyage exceptionnel, où tradition et modernité se rencontrent
+                        pour donner vie à vos rêves d'évasion.
+                    </p>
                 </div>
             </div>
         </div>
@@ -197,87 +202,82 @@
                 </div>
             </div>
         </section>
-
-        <section class="py-32 bg-gray-900"
+        <section class="py-16 md:py-32 bg-gray-900"
             style="background-image: url('/tangierview.jpg'); background-size: cover; background-position: center;">
-            <h1 class="text-5xl font-semibold text-center text-white">À propos de l'agence</h1>
-            <div class="container mx-auto px-4 text-white pl-40 pr-40 mt-20">
-                <div class="mb-10">
-                    <h2 class="text-2xl font-semibold mb-4">Histoire de l'Agence</h2>
-                    <p class="text-lg">
+            <h1 class="text-3xl md:text-5xl font-semibold text-center text-white">À propos de l'agence</h1>
+            <div class="container mx-auto px-4 text-white md:px-8 lg:pl-20 lg:pr-20 mt-10 md:mt-20">
+                <div class="mb-6 md:mb-10">
+                    <h2 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Histoire de l'Agence</h2>
+                    <p class="text-md md:text-lg">
                         Fondée en 2023, BX Cars est née de la passion de Yassine Cherradi Ben Naji pour l'automobile et
-                        l'entrepreneuriat. Notre agence a parcouru un long
-                        chemin, marqué par l'innovation et un engagement inébranlable envers la qualité.
+                        l'entrepreneuriat. Notre agence a parcouru un long chemin, marqué par l'innovation et un
+                        engagement inébranlable envers la qualité.
                     </p>
                 </div>
 
-                <div class="mb-10">
-                    <h2 class="text-2xl font-semibold mb-4">Mission et Vision</h2>
-                    <p class="text-lg">
+                <div class="mb-6 md:mb-10">
+                    <h2 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Mission et Vision</h2>
+                    <p class="text-md md:text-lg">
                         Notre mission est de révolutionner l'expérience de location de voitures au Maroc, en fournissant
-                        un
-                        service exceptionnel, une flotte moderne et une flexibilité sans précédent. Visionnaires, nous
-                        œuvrons pour devenir le leader marocain de la mobilité, en anticipant les besoins de nos clients
-                        et
-                        en adoptant les technologies vertes.
+                        un service exceptionnel, une flotte moderne et une flexibilité sans précédent. Visionnaires,
+                        nous œuvrons pour devenir le leader marocain de la mobilité, en anticipant les besoins de nos
+                        clients et en adoptant les technologies vertes.
                     </p>
                 </div>
 
-
-                <div class="mb-10">
-                    <h2 class="text-2xl font-semibold mb-4">Valeurs et Philosophie</h2>
-                    <p class="text-lg">
+                <div class="mb-6 md:mb-10">
+                    <h2 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Valeurs et Philosophie</h2>
+                    <p class="text-md md:text-lg">
                         L'intégrité, l'innovation et l'engagement client sont au cœur de tout ce que nous faisons. Nous
                         croyons en une approche éthique des affaires, en cultivant une culture d'entreprise positive et
-                        en
-                        investissant dans notre communauté.
+                        en investissant dans notre communauté.
                     </p>
                 </div>
 
-
-                <div class="mb-10">
-                    <h2 class="text-2xl font-semibold mb-4">Engagement envers les Clients et la Communauté</h2>
-                    <p class="text-lg">
+                <div class="mb-6 md:mb-10">
+                    <h2 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4">Engagement envers les Clients et la
+                        Communauté</h2>
+                    <p class="text-md md:text-lg">
                         Chez BX Cars, chaque client est unique. C'est pourquoi nous offrons des services personnalisés
-                        comme
-                        la prise de véhicule gratuite à l'aéroport, à l'agence ou dans n'importe quelle ville du Maroc.
-                        Notre engagement s'étend à la communauté, à travers diverses initiatives écologiques et
+                        comme la prise de véhicule gratuite à l'aéroport, à l'agence ou dans n'importe quelle ville du
+                        Maroc. Notre engagement s'étend à la communauté, à travers diverses initiatives écologiques et
                         sociales.
                     </p>
                 </div>
 
-                <hr>
+                <hr class="my-6">
 
                 <div class="text-center">
-                    <h2 class="text-2xl font-semibold mb-4 mt-10">Rejoignez notre équipe!</h2>
-                    <p class="text-lg mb-6">
+                    <h2 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 mt-6 md:mt-10">Rejoignez notre équipe!
+                    </h2>
+                    <p class="text-md md:text-lg mb-4 md:mb-6">
                         Passionné par l'automobile et le service client? BX Cars est toujours à la recherche de talents.
                         Contactez-nous pour faire partie de notre aventure!
                     </p>
                     <a href="{{ url('/contact') }}"
-                        class="mt-5 inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+                        class="mt-4 md:mt-5 inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
                         Contactez-nous
                     </a>
                 </div>
             </div>
         </section>
 
+
         <section>
             <div id="map" style=" height: 600px; }"></div>
         </section>
     </main>
 
-
-    <footer class="text-white bg-black border-gray-200">
-        <div class="flex flex-col lg:flex-row items-center justify-between py-4 lg:px-12">
+    <footer class="text-white bg-black border-t-2 border-gray-200">
+        <div class="flex flex-col lg:flex-row items-center justify-between py-4 px-4 lg:px-12 gap-4">
             <div>
-                <h1 class="text-3xl uppercase logo">Bxcars</h1>
+                <h1 class="text-2xl lg:text-3xl uppercase logo">Bxcars</h1>
             </div>
-            <div class="flex justify-between gap-4">
+            <div class="flex justify-between gap-2 lg:gap-4">
                 <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
                 <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
             </div>
-            <div class="flex flex-row gap-4">
+            <div class="flex flex-row gap-2 lg:gap-4">
                 <a href="https://www.instagram.com/bx_cars_rental/" target="_blank" rel="noopener noreferrer">
                     <div
                         class="flex items-center justify-center w-8 h-8 transition-transform bg-gray-300 rounded-full hover:bg-gray-200 hover:scale-110">
@@ -285,6 +285,7 @@
                     </div>
                 </a>
 
+                <!-- Facebook -->
                 <a href="https://www.facebook.com/people/Bx-Cars/pfbid0K5HQSNgyJPMsKygqBWgqgy8Mtrr99SHEcJt2s2LckipK9GatJLFvcA8r6zeYxiFel/"
                     target="_blank" rel="noopener noreferrer">
                     <div
@@ -293,6 +294,7 @@
                     </div>
                 </a>
 
+                <!-- Snapchat -->
                 <a href="https://www.snapchat.com/add/bxcars-tanger?share_id=HxAMeEKaQeY&locale=fr-BE" target="_blank"
                     rel="noopener noreferrer">
                     <div
@@ -302,11 +304,10 @@
                 </a>
             </div>
         </div>
-        <div class=" text-sm text-center bg-yellow-500 custom-font">
+        <div class="w-full text-xs lg:text-sm text-center py-2 bg-yellow-500 custom-font">
             <p>MADE IT WITH PASSION ♥ ~ <a href="http://nawfelajari.be" class="text-white hover:text-gray-800"
                     target="_blank" rel="noopener noreferrer">NAWFEL AJARI</a> &#169; 2024</p>
         </div>
-
     </footer>
 
     <script>
