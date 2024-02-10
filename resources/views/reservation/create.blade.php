@@ -24,9 +24,9 @@
 </head>
 
 <body>
-    <header class="flex flex-col min-h-screen">
-        <section class="relative h-screen text-white bg-black mb-60 -top-10"
-            style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <header class="flex flex-col min-h-screen"
+        style="background-image: url('{{ asset('car-hero.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <section class="relative h-screen text-white mb-60 -top-10">
             <div x-data="{ open: false }">
                 <nav class="flex justify-between items-center py-8 px-4">
                     <button @click="open = !open" class="space-y-2 focus:outline-none">
@@ -116,179 +116,179 @@
                     document.getElementById('successMessage').style.display = 'none';
                 }, 3000);
             </script>
-    </header>
 
-    <main>
-        <section>
-            <!-- Form Succeeded -->
-            <div class="z-10 flex justify-center items-start mb-0 duration-500">
-                <div
-                    class="flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl hover:bg-yellow-400 transition-colors duration-300">
-                    <div class="contact-container text-center">
-                        <h2 class="text-3xl">Merci pour votre réservation !</h2>
-                        <p>Votre réservation est désormais en attente de l'acceptation d'un travailleur de l'agence.
-                            En cas d'acceptation, vous recevrez une confirmation dans les plus brefs délais via
-                            votre boite mail.</p>
-                        <img src="{{ asset('loading.gif') }}" alt="Loading" class="mx-auto w-20 h-20 mt-5">
-                        <p class="mt-5">Si vous avez des questions ou si vous avez besoin d'informations
-                            supplémentaires,
-                            n'hésitez pas à nous contacter.</p>
-                        <div>
-                            <p>Téléphone : +32 491 76 89 74</p>
-                            <p>Email : info@bxcars.be</p>
-                            <hr class="mt-5">
-                            <div class="flex items-center justify-center mt-5">
-                                <a href="{{ url('/') }}"
-                                    class="bg-yellow-500 text-2xl text-white px-10 py-3 rounded transition duration-500 hover:bg-black mr-1.5 inline-block">
-                                    RETOUR
-                                </a>
-                                <a href="{{ url('/about') }}"
-                                    class="bg-yellow-500 text-2xl text-white px-5 py-3 rounded transition duration-500 hover:bg-black ml-1.5 inline-block">
-                                    À PROPOS DE NOUS
-                                </a>
 
+            <section>
+                <!-- Form Succeeded -->
+                <div class="z-10 flex justify-center items-start mb-0 duration-500">
+                    <div
+                        class="flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-white/50 rounded-3xl hover:bg-yellow-400 transition-colors duration-300">
+                        <div class="contact-container text-center">
+                            <h2 class="text-3xl">Merci pour votre réservation !</h2>
+                            <p>Votre réservation est désormais en attente de l'acceptation d'un travailleur de l'agence.
+                                En cas d'acceptation, vous recevrez une confirmation dans les plus brefs délais via
+                                votre boite mail.</p>
+                            <img src="{{ asset('loading.gif') }}" alt="Loading" class="mx-auto w-20 h-20 mt-5">
+                            <p class="mt-5">Si vous avez des questions ou si vous avez besoin d'informations
+                                supplémentaires,
+                                n'hésitez pas à nous contacter.</p>
+                            <div>
+                                <p>Téléphone : +32 491 76 89 74</p>
+                                <p>Email : info@bxcars.be</p>
+                                <hr class="mt-5">
+                                <div class="flex items-center justify-center mt-5">
+                                    <a href="{{ url('/') }}"
+                                        class="bg-yellow-500 text-2xl text-white px-10 py-3 rounded transition duration-500 hover:bg-black mr-1.5 inline-block">
+                                        RETOUR
+                                    </a>
+                                    <a href="{{ url('/about') }}"
+                                        class="bg-yellow-500 text-2xl text-white px-5 py-3 rounded transition duration-500 hover:bg-black ml-1.5 inline-block">
+                                        À PROPOS DE NOUS
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            @else
-            @if($futureUnavailableDates->isNotEmpty())
-            <div class="flex justify-center mt-8">
-                <div class="px-4 lg:max-w-4xl mx-auto">
-                    <div class="overflow-x-auto rounded-lg shadow-md">
-                        <table class=" table-auto text-center mx-auto">
-                            <thead>
-                                <tr class="bg-red-500 text-white">
-                                    <th colspan="2" class="px-4">Indisponibilité du véhicule</th>
-                                </tr>
-                                <tr class="bg-gray-800 text-white">
-                                    <th class="px-4">Date de Début</th>
-                                    <th class="px-4">Date de Fin</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($futureUnavailableDates as $date)
-                                @php
-                                $startDate = \Carbon\Carbon::parse($date['start']);
-                                $endDate = \Carbon\Carbon::parse($date['end']);
-                                $format = 'j F Y';
-                                @endphp
-                                <tr class="bg-gray-500 border-b">
-                                    <td class="px-4 py-2 border-r">{{ $startDate->translatedFormat($format) }}</td>
-                                    <td class="px-4 py-2">
-                                        @if($startDate->format('Y-m-d') !== $endDate->format('Y-m-d'))
-                                        {{ $endDate->translatedFormat($format) }}
-                                        @else
-                                        {{ $startDate->translatedFormat($format) }}
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                @else
+                @if($futureUnavailableDates->isNotEmpty())
+                <div class="flex justify-center mt-8">
+                    <div class="px-4 lg:max-w-4xl mx-auto">
+                        <div class="overflow-x-auto rounded-lg shadow-md">
+                            <table class=" table-auto text-center mx-auto">
+                                <thead>
+                                    <tr class="bg-red-500 text-white">
+                                        <th colspan="2" class="px-4">Indisponibilité du véhicule</th>
+                                    </tr>
+                                    <tr class="bg-gray-800 text-white">
+                                        <th class="px-4">Date de Début</th>
+                                        <th class="px-4">Date de Fin</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($futureUnavailableDates as $date)
+                                    @php
+                                    $startDate = \Carbon\Carbon::parse($date['start']);
+                                    $endDate = \Carbon\Carbon::parse($date['end']);
+                                    $format = 'j F Y';
+                                    @endphp
+                                    <tr class="bg-gray-500 border-b">
+                                        <td class="px-4 py-2 border-r">{{ $startDate->translatedFormat($format) }}</td>
+                                        <td class="px-4 py-2">
+                                            @if($startDate->format('Y-m-d') !== $endDate->format('Y-m-d'))
+                                            {{ $endDate->translatedFormat($format) }}
+                                            @else
+                                            {{ $startDate->translatedFormat($format) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @endif
+                @endif
+                <!-- Reservation Form -->
+                <div class="z-10 flex justify-center items-start mb-0 duration-500 mt-5 -top-100">
+                    <div
+                        class="flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-black/50 rounded-3xl hover:bg-yellow-400 transition-colors duration-300">
+                        <form action="{{ route('reservations.store') }}" method="POST" class="reservation-form">
+                            <h1 class="form-title text-yellow-500">RÉSERVATION</h1>
+                            @csrf
+                            <input type="hidden" name="car_id" value="{{ $carId }}">
+                            <div class="flex flex-wrap justify-between">
+                                <div class="input-group w-full lg:w-1/2 mt-7">
+                                    <label for="nom" class="block text-sm font-medium text-yellow-500">Nom et
+                                        prénom</label>
+                                    <input type="text" name="first_name" required placeholder="Nom">
+                                    <input type="text" name="last_name" required placeholder="Prénom">
+                                    <label for="numero" class="block text-sm font-medium text-yellow-500">Numéro de
+                                        téléphone</label>
+                                    <input type="tel" name="phone" required placeholder="Numéro de téléphone">
+                                    <label for="email" class="block text-sm font-medium text-yellow-500">Email</label>
+                                    <input type="email" name="email" required placeholder="Adresse email">
+                                </div>
+                                <div class="input-group w-full lg:w-1/2">
+                                    <label for="pickup_location"
+                                        class="block text-sm font-medium text-yellow-500 mt-10">Lieu
+                                        de
+                                        prise</label>
+                                    <select id="pickup_location" class="text-gray-500" name="pickup_location" required>
+                                        <option class="text-yellow-500" value="airport">Aéroport</option>
+                                        <option class="text-yellow-500" value="agency">Agence</option>
+                                        <option class="text-yellow-500" value="other_city">Autre ville</option>
+                                    </select>
 
+                                    <label for="start_date" class="block text-sm font-medium text-yellow-500">Date de
+                                        début</label>
+                                    <input id="start_date" class="text-gray-500" type="date" name="start_date" required>
 
-            <!-- Reservation Form -->
-            <div class="z-10 flex justify-center items-start mb-0 duration-500 mt-5">
-                <div
-                    class="flex flex-row gap-8 px-12 py-6 text-black shadow-lg bg-black/50 rounded-3xl hover:bg-yellow-400 transition-colors duration-300">
-                    <form action="{{ route('reservations.store') }}" method="POST" class="reservation-form">
-                        <h1 class="form-title text-yellow-500">RÉSERVATION</h1>
-                        @csrf
-                        <input type="hidden" name="car_id" value="{{ $carId }}">
-                        <div class="flex flex-wrap justify-between">
-                            <div class="input-group w-full lg:w-1/2 mt-7">
-                                <label for="nom" class="block text-sm font-medium text-yellow-500">Nom et prénom</label>
-                                <input type="text" name="first_name" required placeholder="Nom">
-                                <input type="text" name="last_name" required placeholder="Prénom">
-                                <label for="numero" class="block text-sm font-medium text-yellow-500">Numéro de
-                                    téléphone</label>
-                                <input type="tel" name="phone" required placeholder="Numéro de téléphone">
-                                <label for="email" class="block text-sm font-medium text-yellow-500">Email</label>
-                                <input type="email" name="email" required placeholder="Adresse email">
+                                    <label for="end_date" class="block text-sm font-medium text-yellow-500">Date de
+                                        fin</label>
+                                    <input id="end_date" class="text-gray-500" type="date" name="end_date" required>
+                                </div>
                             </div>
-                            <div class="input-group w-full lg:w-1/2">
-                                <label for="pickup_location"
-                                    class="block text-sm font-medium text-yellow-500 mt-10">Lieu
-                                    de
-                                    prise</label>
-                                <select id="pickup_location" class="text-gray-500" name="pickup_location" required>
-                                    <option class="text-yellow-500" value="airport">Aéroport</option>
-                                    <option class="text-yellow-500" value="agency">Agence</option>
-                                    <option class="text-yellow-500" value="other_city">Autre ville</option>
+
+                            <div class="flex flex-col items-center mt-4">
+                                <label for="payment_method"
+                                    class="mb-2 text-sm font-medium text-yellow-500">Paiement</label>
+                                <select id="payment_method" name="payment_method" disabled
+                                    class="text-gray-500 cursor-not-allowed bg-gray-100"
+                                    title="Le paiement sur place est actuellement sélectionné et ne peut être modifié.">
+                                    <option value="on_site">Sur place</option>
                                 </select>
-
-                                <label for="start_date" class="block text-sm font-medium text-yellow-500">Date de
-                                    début</label>
-                                <input id="start_date" class="text-gray-500" type="date" name="start_date" required>
-
-                                <label for="end_date" class="block text-sm font-medium text-yellow-500">Date de
-                                    fin</label>
-                                <input id="end_date" class="text-gray-500" type="date" name="end_date" required>
                             </div>
-                        </div>
 
-                        <div class="flex flex-col items-center mt-4">
-                            <label for="payment_method"
-                                class="mb-2 text-sm font-medium text-yellow-500">Paiement</label>
-                            <select id="payment_method" name="payment_method" disabled
-                                class="text-gray-500 cursor-not-allowed bg-gray-100"
-                                title="Le paiement sur place est actuellement sélectionné et ne peut être modifié.">
-                                <option value="on_site">Sur place</option>
-                            </select>
-                        </div>
+                            <p class="mt-5 pl-5 pr-5 text-white">* Confiance garantie : Paiement uniquement sur place
+                            </p>
+                            <p class=" pl-5 pr-5 text-white mb-10">* Service offert : Lieu de prise de voiture</p>
+                            <div class="flex justify-center mb-10">
+                                <button type="submit"
+                                    class="bg-yellow-500 text-white px-10 py-3 rounded transition duration-500 hover:bg-black">Demander
+                                    une réservation</button>
+                            </div>
 
-                        <p class="mt-5 pl-5 pr-5">* Confiance garantie : Paiement uniquement sur place</p>
-                        <p class=" pl-5 pr-5">* Service offert : Lieu de prise de voiture</p>
-                        <div class="flex justify-center mb-10">
-                            <button type="submit"
-                                class="bg-yellow-500 text-white px-10 py-3 rounded transition duration-500 hover:bg-black">Demander
-                                une réservation</button>
-                        </div>
+                            @if(session('error'))
+                            <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
+                                {{ session('error') }}
+                            </div>
+                            @endif
 
-                        @if(session('error'))
-                        <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
-                            {{ session('error') }}
-                        </div>
-                        @endif
-
-                        @if($errors->any())
-                        <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-                    </form>
+                            @if($errors->any())
+                            <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </form>
+                    </div>
                 </div>
-            </div>
-            @endif
-            @if(session('error'))
-            <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
-                {{ session('error') }}
-            </div>
-            @endif
-            @if($errors->any())
-            <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-        </section>
+                @endif
+                @if(session('error'))
+                <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
+                    {{ session('error') }}
+                </div>
+                @endif
+                @if($errors->any())
+                <div class="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 px-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+    </header>
+    </section>
 
-        <section class="mt-80">
+    <section class="mt-80">
 
-        </section>
+    </section>
     </main>
 
 
