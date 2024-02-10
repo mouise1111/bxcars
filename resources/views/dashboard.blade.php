@@ -494,7 +494,7 @@
                 </table>
                 @if($reservations->where('status', 'accepted')->isEmpty())
                 <div class="text-center py-8">
-                    <p class="text-lg text-yellow-500">Il n'y a pour l'instant aucune réservation confirmée.</p>
+                    <p class="text-lg text-yellow-500">Il n'y a pour l'instant aucune réservation archivée.</p>
                 </div>
                 @else
                 <table class="min-w-full divide-y divide-gray-200">

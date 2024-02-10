@@ -106,17 +106,71 @@
             Votre clé pour explorer le Maroc, confort et liberté garantis
         </h1>
     </div>
-
-
-
     </div>
     </section>
+    <div class="marquee">
+        <div class="marquee-content">
+            @php
+            $paragraph = \App\Models\HomepageParagraph::latest()->first();
+            @endphp
+
+            @if($paragraph && trim($paragraph->content) !== '')
+            <p>{{ $paragraph->content }}</p>
+            @endif
+        </div>
+    </div>
+
+
+    <style>
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+            background-color: red;
+
+        }
+
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            /* Ajoute un espace avant le défilement */
+            box-sizing: border-box;
+            text: white;
+        }
+
+        .marquee p {
+            display: inline-block;
+            color: white;
+            font-size: 30px;
+            padding-right: 50px;
+            margin-bottom: 2%;
+            /* Espace entre les répétitions */
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee-content {
+            animation: scroll-left 20s linear infinite;
+        }
+    </style>
     <section class="py-32 text-black bg-gray-100">
+
+
         <h1 class="text-5xl font-semibold text-center">Notre collection de voitures</h1>
         <h3 class="mt-4 text-lg text-center lg:px-56">
             De citadines modernes à des SUV robustes, chaque véhicule est méticuleusement sélectionné pour garantir une
             expérience de conduite confortable et à la pointe de la technologie.
         </h3>
+
 
         @if(Route::has('login'))
         @auth

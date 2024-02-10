@@ -8,6 +8,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomepageParagraphController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 
@@ -53,6 +54,7 @@ Route::get('/reservation/{car}', [ReservationController::class, 'create'])->name
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 Route::patch('/reservations/{id}/accept', [ReservationController::class, 'accept'])->name('admin.reservations.accept');
 Route::post('/reservations/{id}/reject', [ReservationController::class, 'reject'])->name('reservations.reject');
+Route::post('/send-promotion-email', [ReservationController::class, 'sendPromotionEmail'])->name('send.promotion.email');
 
 Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 
@@ -73,5 +75,7 @@ Route::get('/contact', [ContactController::class, 'create'])->name('contact.crea
 
 Route::get('/services', [ServicesController::class, 'index'])->name('services.index');
 
+Route::get('/admin/paragraph/edit', [HomepageParagraphController::class, 'edit']);
+Route::post('/admin/paragraph/update', [HomepageParagraphController::class, 'update']);
 
 require __DIR__ . '/auth.php';
