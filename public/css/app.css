@@ -1,3 +1,6 @@
+body {
+    font-family: "Saira Condensed", sans-serif;
+}
 #selection {
     position: absolute;
     bottom: -125px;

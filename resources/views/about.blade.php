@@ -10,15 +10,13 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+Double+Pica+SC&family=Inter&family=Koulen&family=League+Gothic&family=Lobster&family=Playfair+Display+SC&family=Saira+Condensed:wght@600&family=Saira+Stencil+One&family=Waterfall&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         .custom-font {
             font-family: 'Poppins';
@@ -41,6 +39,7 @@
         }
     </style>
 </head>
+
 
 <body
     style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
@@ -105,6 +104,8 @@
                         <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
                         <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
                         <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                        <a href="{{ url('/profile') }}" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500">Mon
+                            compte</a>
                         <a href="#" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500"
                             onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
                             <img class="inline cursor-pointer h-3" src="{{ asset('logout.png') }}" alt="Déconnexion">
@@ -122,7 +123,7 @@
 
             <h1
                 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl mt-10 md:mt-20 font-bold text-white text-center px-4 lg:px-32">
-                Découvrez l'Histoire Derrière Chaque Kilomètre avec BX Cars
+                Découvrez l'histoire derrière chaque Kilomètre avec BX Cars
             </h1>
             <div class="story-section mt-20 md:mt-40">
                 <div class="story-content px-4 md:px-10 lg:px-20">
@@ -275,6 +276,7 @@
             </div>
             <div class="flex justify-between gap-2 lg:gap-4">
                 <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
+                <a href="/services#section1" class="text-gray-300 transition-colors hover:text-white">Conditions</a>
                 <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
             </div>
             <div class="flex flex-row gap-2 lg:gap-4">

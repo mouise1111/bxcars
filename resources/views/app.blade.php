@@ -10,25 +10,34 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Tera:wght@600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+Double+Pica+SC&family=Inter&family=Koulen&family=League+Gothic&family=Lobster&family=Playfair+Display+SC&family=Saira+Condensed:wght@600&family=Saira+Stencil+One&family=Waterfall&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
+    <!-- Scripts : Ajax / UNKG / Vite -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    @vite('resources/css/app.css')
+
+    <!--CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6vP0kZfSfQLz2Whle6PvjeK9fuT+9HbR4uPm3IjB4z1EW2koqT92yWfJYF8Dg3j" crossorigin="anonymous">
+
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    @vite('resources/css/app.css')
     <style>
         .custom-font {
             font-family: 'Poppins';
 
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-k6vP0kZfSfQLz2Whle6PvjeK9fuT+9HbR4uPm3IjB4z1EW2koqT92yWfJYF8Dg3j" crossorigin="anonymous">
-
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    @vite('resources/css/app.css')
 </head>
 
 <body>
@@ -80,6 +89,8 @@
                     <a href="{{ url('/membres') }}" class="py-2 text-gray-400 hover:text-yellow-500">Membres</a>
                     <a href="{{ url('/cars/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyCARS</a>
                     <a href="{{ url('/user/create') }}" class="py-2 text-gray-400 hover:text-yellow-500">MyADMIN</a>
+                    <a href="{{ url('/profile') }}" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500">Mon
+                        compte</a>
                     <a href="#" class="sm:hidden py-2 text-gray-400 hover:text-yellow-500"
                         onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
                         <img class="inline cursor-pointer h-3" src="{{ asset('logout.png') }}" alt="Déconnexion">
@@ -290,6 +301,7 @@
             </div>
             <div class="flex justify-between gap-2 lg:gap-4">
                 <a href="{{ url('/about') }}" class="text-gray-300 transition-colors hover:text-white">À propos</a>
+                <a href="/services#section1" class="text-gray-300 transition-colors hover:text-white">Conditions</a>
                 <a href="/contact" class="text-gray-300 transition-colors hover:text-white">Contact</a>
             </div>
             <div class="flex flex-row gap-2 lg:gap-4">

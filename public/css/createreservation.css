@@ -79,4 +79,64 @@ body {
     .input-group {
         width: 100%;
     }
+
+    @media (max-width: 640px) {
+        .flex.flex-row.gap-8.px-12.py-6 {
+            padding: 0 4px; /* Réduction du padding sur les petits écrans */
+        }
+
+        .form-title {
+            font-size: 1.5rem; /* Réduction de la taille du texte pour le titre */
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 0.5rem; /* Augmentation du padding pour faciliter la saisie sur écran tactile */
+        }
+
+        .input-group {
+            padding: 0; /* Réduction du padding sur les côtés */
+        }
+
+        /* Assurez-vous que les boutons ne sont pas trop larges ou trop étroits */
+        a.bg-yellow-500 {
+            display: block; /* Permet aux boutons de s'étendre sur toute la largeur */
+            margin: 10px 0; /* Ajoute un peu d'espace autour des boutons */
+        }
+    }
+
+    /* Adaptation pour les tablettes et petits écrans de bureau */
+    @media (max-width: 1024px) {
+        /* Ajustements similaires peuvent être faits pour les tablettes */
+    }
+}
+
+@media (max-width: 640px) {
+    .flex.flex-row.gap-8.px-12.py-6 {
+        padding: 0 4px; /* Réduction du padding sur les petits écrans */
+    }
+
+    .form-title {
+        font-size: 1.5rem; /* Réduction de la taille du texte pour le titre */
+    }
+
+    .input-group input,
+    .input-group select {
+        padding: 0.5rem; /* Augmentation du padding pour faciliter la saisie sur écran tactile */
+    }
+
+    .input-group {
+        padding: 0; /* Réduction du padding sur les côtés */
+    }
+
+    /* Assurez-vous que les boutons ne sont pas trop larges ou trop étroits */
+    a.bg-yellow-500 {
+        display: block; /* Permet aux boutons de s'étendre sur toute la largeur */
+        margin: 10px 0; /* Ajoute un peu d'espace autour des boutons */
+    }
+}
+
+/* Adaptation pour les tablettes et petits écrans de bureau */
+@media (max-width: 1024px) {
+    /* Ajustements similaires peuvent être faits pour les tablettes */
 }

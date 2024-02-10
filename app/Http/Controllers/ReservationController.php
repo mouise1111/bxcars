@@ -86,12 +86,14 @@ class ReservationController extends Controller
 
             $this->updateCarAvailabilityOnReservation($reservation->car_id, false);
 
-            $pdf = PDF::loadView('emails.reservation_pdf', ['reservation' => $reservation]);
+            $pdfFR = PDF::loadView('emails.reservation.FRconfirmation', ['reservation' => $reservation]);
+            $pdfEN = PDF::loadView('emails.reservation.ENconfirmation', ['reservation' => $reservation]);
 
-            Mail::send('emails.reservation.confirmation', ['reservation' => $reservation], function ($message) use ($pdf, $reservation) {
+            Mail::send('emails.reservation.confirmation', ['reservation' => $reservation], function ($message) use ($pdfFR, $pdfEN, $reservation) {
                 $message->to($reservation->email)
                     ->subject('Confirmation de Réservation')
-                    ->attachData($pdf->output(), "confirmation_reservation.pdf");
+                    ->attachData($pdfFR->output(), "fr.confirmation_reservation.pdf")
+                    ->attachData($pdfEN->output(), "en.confirmation_reservation.pdf");
             });
 
             return redirect()->route('dashboard')->with('success', 'La réservation a été acceptée avec succès et l\'email a été envoyé.');
