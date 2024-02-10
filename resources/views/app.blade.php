@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Accueil | BX Cars</title>
-    <link href="/bxlogo-modified.png" sizes="32x32" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/bxlogo-modified.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -143,8 +143,7 @@
             display: inline-block;
             color: white;
             font-size: 30px;
-            padding-right: 50px;
-            margin-bottom: 2%;
+
             /* Espace entre les répétitions */
         }
 
@@ -254,11 +253,10 @@
             @endforeach
         </div>
         </div>
-        </div>
         <div class="flex justify-center lg:py-12">
             <button id="voirPlusBtn"
-                class="transition-colors bg-black border-2 border-black text-white hover:bg-gray-500 hover:border-black rounded-3xl mt-5">
-                <h4 class="px-4 py-2 lg:px-8 lg:py-4 text-sm lg:text-base">Voir plus</h4>
+                class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black">
+                <h4 class="w-full px-8 py-4">Voir plus</h4>
             </button>
         </div>
     </section>
@@ -401,7 +399,58 @@
                     alert("L'agence ne possède actuellement que " + {{ $totalCars }} + " véhicules.");
             });
         }
+    });
 
+        const quotesData = [
+            {
+                title: "Richard Branson a dit ...",
+                quote: "Si quelqu'un vous offre une opportunité incroyable mais que vous n'êtes pas sûr de pouvoir le faire, dites oui - puis apprenez comment le faire plus tard!",
+                context: "Avec BX Cars, saisissez l'opportunité de partir à l'aventure, même si c'est sur un coup de tête, avec la facilité et la flexibilité de la location de voiture.",
+                imgSrc: "/branson.jpg",
+                imgAlt: "Richard Branson",
+                // POUR CHATGPT : CECI DOIT ETRE AJOUTE 
+                person: "Richard Branson",
+                reference: "Autobiographie Finding My Virginity"
+            },
+            {
+                title: "Elon Musk a dit ...",
+                quote: "Quand quelque chose est suffisamment important, vous le faites même si les chances ne sont pas en votre faveur.",
+                context: "Avec BX Cars, relevez le défi de l'inattendu et lancez-vous dans l'aventure, quelle que soit la destination. Notre service de location de voiture vous offre la liberté de poursuivre ce qui vous est important, avec la confiance et le soutien nécessaires pour explorer de nouveaux horizons.",
+                imgSrc: "/elonmusk.jpg",
+                imgAlt: "Elon Musk",
+                // POUR CHATGPT : CECI DOIT ETRE AJOUTE 
+                person: "Elon Musk",
+                reference: "Philosophie d'Elon Musk sur la prise de risques."
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateContent(index) {
+            index = Math.max(0, Math.min(index, quotesData.length - 1));
+            const data = quotesData[index];
+            document.querySelector("h2.mb-16").textContent = data.title;
+            document.querySelector("p.text-2xl").textContent = data.quote;
+            document.querySelector("section > span").textContent = data.context;
+            document.querySelector("div.w-20 > img").src = data.imgSrc;
+            document.querySelector("div.w-20 > img").alt = data.imgAlt;
+            document.querySelector("h4.font-bold").textContent = data.person;
+            document.querySelector("h6.text-gray-800").textContent = data.reference;
+        }
+
+        document.querySelector("img[src='/left-arrow.png']").closest("div").addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateContent(currentIndex);
+            }
+        });
+
+        document.querySelector("img[src='/right-arrow.png']").closest("div").addEventListener("click", () => {
+            if (currentIndex < quotesData.length - 1) {
+                currentIndex++;
+                updateContent(currentIndex);
+            }
+        });
     </script>
 </body>
 
