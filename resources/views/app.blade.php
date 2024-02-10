@@ -408,7 +408,6 @@
                 context: "Avec BX Cars, saisissez l'opportunité de partir à l'aventure, même si c'est sur un coup de tête, avec la facilité et la flexibilité de la location de voiture.",
                 imgSrc: "/branson.jpg",
                 imgAlt: "Richard Branson",
-                // POUR CHATGPT : CECI DOIT ETRE AJOUTE 
                 person: "Richard Branson",
                 reference: "Autobiographie Finding My Virginity"
             },
@@ -418,7 +417,6 @@
                 context: "Avec BX Cars, relevez le défi de l'inattendu et lancez-vous dans l'aventure, quelle que soit la destination. Notre service de location de voiture vous offre la liberté de poursuivre ce qui vous est important, avec la confiance et le soutien nécessaires pour explorer de nouveaux horizons.",
                 imgSrc: "/elonmusk.jpg",
                 imgAlt: "Elon Musk",
-                // POUR CHATGPT : CECI DOIT ETRE AJOUTE 
                 person: "Elon Musk",
                 reference: "Philosophie d'Elon Musk sur la prise de risques."
             }
