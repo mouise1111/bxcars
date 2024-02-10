@@ -295,6 +295,10 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
                                 Montant</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
@@ -312,6 +316,7 @@
                     </thead>
                     <tbody class=" divide-y divide-gray-200">
                         @foreach($reservations->where('status', 'accepted') as $reservation)
+                        @if(\Carbon\Carbon::parse($reservation->end_date)->addDay()->isFuture())
                         <tr>
                             <td class=" bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                                 {{ $reservation->first_name }} {{ $reservation->last_name }}
@@ -347,6 +352,9 @@
                             <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                                 {{ $reservation->phone }}
                             </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->email }}
+                            </td>
                             </td>
                             <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                                 {{ number_format($reservation->total_cost, 0, '.','') }} DH
@@ -371,6 +379,7 @@
                                 </form>
                             </td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -396,6 +405,117 @@
                 @endif
             </div>
         </div>
+
+        <div class="mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <h1 class="text-3xl font-semibold text-white mb-4">Réservations archivées</h1>
+            <p class="text-white mb-6">Les réservations dont leur date prend fin sont archivées ci-dessous.</p>
+            <div class="shadow-md overflow-hidden border border-gray-200 sm:rounded-lg overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider ">
+                                Nom</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Véhicule</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Numéro de téléphone
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Email
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Montant</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de début
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Date de fin
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-yellow-500 uppercase tracking-wider">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class=" divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'accepted') as $reservation)
+                        @if(\Carbon\Carbon::parse($reservation->end_date)->addDay()->isPast())
+                        <tr>
+                            <td class=" bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->first_name }} {{ $reservation->last_name }}
+                            </td>
+                            <td
+                                class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white flex flex-col items-center justify-center">
+                                <div>{{ $reservation->car->model_name ?? 'N/A' }}<br>{{ $reservation->car->total_km
+                                    ??
+                                    'N/A' }} KM</div>
+
+                            </td>
+
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->phone }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ $reservation->email }}
+                            </td>
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                                {{ number_format($reservation->total_cost, 0, '.','') }} DH
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->start_date)->translatedFormat('j
+                                F Y') }}
+                            </td>
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm text-yellow-500">
+                                {{ \Carbon\Carbon::parse($reservation->end_date)->translatedFormat('j F
+                                Y') }}
+                            </td>
+
+                            <td class="bg-gray-800 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <p class="px-4 py-2 text-sm text-yellow-500 rounded">
+                                        Archivé
+                                        </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+                @if($reservations->where('status', 'accepted')->isEmpty())
+                <div class="text-center py-8">
+                    <p class="text-lg text-yellow-500">Il n'y a pour l'instant aucune réservation confirmée.</p>
+                </div>
+                @else
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <!-- Table headers -->
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @foreach($reservations->where('status', 'accepted') as $reservation)
+                        <tr>
+                            <!-- Reservation data -->
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
+            </div>
+        </div>
+
+
 
         <script src="{{ asset('js/dashboard.js') }}"></script>
 </body>
