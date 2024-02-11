@@ -242,7 +242,7 @@
                                 <td class="px-5 py-5 border-b border-gray-200 text-sm bg-gray-800">
                                     <div class="flex items-center gap-2">
                                         <a href="{{ route('membres.edit', $membre->id) }}"
-                                            class="inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out h-10 align-middle">Modifier</a>
+                                            class="mt-3 inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition duration-150 ease-in-out h-10 align-middle">Modifier</a>
                                         <form action="{{ route('membres.destroy', $membre->id) }}" method="POST"
                                             onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce membre ?');"
                                             class="inline">

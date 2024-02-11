@@ -255,7 +255,7 @@
         </div>
         <div class="flex justify-center lg:py-12">
             <button id="voirPlusBtn"
-                class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black">
+                class="text-white transition-colors bg-black border-2 rounded-3xl hover:bg-gray-500 border-inherit hover:border-black mt-20">
                 <h4 class="w-full px-8 py-4">Voir plus</h4>
             </button>
         </div>

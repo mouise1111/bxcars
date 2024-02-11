@@ -18,6 +18,11 @@ use App\Models\Car;
 |--------------------------------------------------------------------------
 */
 
+require __DIR__ . '/auth.php';
+Route::get('/register', function () {
+    return redirect('/');
+});
+
 Route::get('/', function () {
     $cars = Car::all();
     $totalCars = Car::count();
@@ -77,5 +82,3 @@ Route::get('/services', [ServicesController::class, 'index'])->name('services.in
 
 Route::get('/admin/paragraph/edit', [HomepageParagraphController::class, 'edit']);
 Route::post('/admin/paragraph/update', [HomepageParagraphController::class, 'update']);
-
-require __DIR__ . '/auth.php';

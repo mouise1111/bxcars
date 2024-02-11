@@ -42,7 +42,7 @@
 
 
 <body
-    style="background-image: url('{{ asset('wallpapertanger3.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    style="background-image: url('{{ asset('wallpapertanger5.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <header>
         <div class="relative min-h-screen absolute -top-10">
             @if(session('success'))

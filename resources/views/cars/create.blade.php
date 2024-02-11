@@ -267,7 +267,7 @@
                         <label for="content" class="block text-sm font-medium text-white">Message flash sur l'accueil
                             :</label>
                         <textarea id="content" name="content"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            class="bg-gray-900 text-white mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             rows="4">{{ $paragraph->content ?? '' }}</textarea>
                     </div>
                     <button type="submit"

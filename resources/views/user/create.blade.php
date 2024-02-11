@@ -163,7 +163,7 @@
                 L'authentification d'email est désactivé.
             </p>
             <div class="mt-8 flex justify-between bg-gray-800 shadow border-white border-2 rounded-lg mb-20 mt-10">
-                <div class="w-1/2 pr-4">
+                <div class="w-1/2 pr-4 mb-5">
                     <form method="POST" action="{{ route('user.store') }}" class="space-y-4 ml-5 mr-5">
                         @csrf
                         <div>
