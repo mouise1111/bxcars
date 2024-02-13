@@ -25,7 +25,7 @@ class Car extends Model
     public function getPhotoUrlAttribute()
     {
         if ($this->photo) {
-            return asset('public/cars/' . $this->photo);
+            return asset('storage/cars/' . $this->photo); //public/cars/ for deployment
         }
 
         return null;
